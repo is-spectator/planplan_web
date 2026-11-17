@@ -16,7 +16,7 @@
 
 此前计划功能版本已于 **2026-11-17上海10:18:05激活，source `09ab4038…`、build `22da525a…`**。同包目标PG15.19完整727/727、TLS安全检查及隔离加密恢复通过，公网匿名GET74/74已通过，见[今日发布记录](releases/2026-11-17-plan-functions.md)。11月16日86c64c版本的创作、计划内对话、退款与关联退款确认修复保留为[历史发布证据](template-platform/function-release-2026-11-16.md)。账号专项、异地备份、真人和设备安排按用户要求暂缓。
 
-前端位于 `planplan_web` 的 `codex/web-foundation` 分支，配套后端位于相邻 `planplan-web-session` checkout 的 `codex/web-session` 分支；两边修改尚未提交或推送。后端基线为 `1fc1bc5136af4f4e69cc81ef74863fbe34b208d2`，原有其他 checkout 和 8787 服务未改动。
+历史开发位置（已被单仓main基线取代）：前端曾在 `codex/web-foundation`，后端曾在相邻 `planplan-web-session` 的 `codex/web-session`。当前前后端已全部提交至 `planplan_web/main`，见单仓交付记录。后端基线为 `1fc1bc5136af4f4e69cc81ef74863fbe34b208d2`，原有其他 checkout 和 8787 服务未改动。
 
 ## 当前开发目标
 

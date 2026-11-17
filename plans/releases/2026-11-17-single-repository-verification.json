@@ -26,5 +26,16 @@
   "cloudModelCalls": 0,
   "productionDeployment": "unchanged 9f763547",
   "stagedSourceFiles": 402,
-  "stagedAudit": "no private configuration, raw evidence, dependencies or data; trailing blank lines normalized"
+  "stagedAudit": "no private configuration, raw evidence, dependencies or data; trailing blank lines normalized",
+  "gitBaselineCommit": "cdc03cf398446ec4dee23f37c50b028994b4f22d",
+  "remoteDefaultBranch": "main",
+  "freshGitHubClone": {
+    "commit": "cdc03cf398446ec4dee23f37c50b028994b4f22d",
+    "frontendInstall": "passed",
+    "backendInstall": "passed",
+    "frontendBuild": "passed",
+    "backendBuild": "passed",
+    "worktreeClean": true
+  },
+  "localModelConfig": "private ignored server/.env.openrouter.local, mode 0600, not tracked"
 }

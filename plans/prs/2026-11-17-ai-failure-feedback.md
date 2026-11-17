@@ -21,7 +21,7 @@
 - 精确部署源码包：`/Users/fangnaoke/.codex/backups/planplan-web-20261117-trial-deployment/final-package/planplan-web-9f763547a80cb687.tar.gz`。
 - 可公开核对的源码清单：[final-source-manifest.json](../releases/2026-11-17-source-manifest.json)。包内 `candidate/server/` 对应仓库 `server/`。
 
-当前代码已经归入单仓布局：网页在根目录 `src/`，后端在 `server/`，部署脚本在 `deploy/`。后续从 `is-spectator/planplan_web` 的 `origin/main` 建立功能分支，不再检出或修改参考仓库。单仓基线提交与验证见[单仓交付记录](../todos/2026-11-17-single-repository.md)；执行前先确认该基线已同步，保护工作区中其他未提交修改。
+当前代码已经归入单仓布局：网页在根目录 `src/`，后端在 `server/`，部署脚本在 `deploy/`。后续从 `is-spectator/planplan_web` 的 `origin/main` 建立功能分支，不再检出或修改参考仓库。单仓基线提交与验证见[单仓交付记录](../todos/2026-11-17-single-repository.md)；单仓代码基线 `cdc03cf398446ec4dee23f37c50b028994b4f22d` 已同步，干净克隆可构建；实施时从最新origin/main分支，保护其他未提交修改。
 
 9f清单用于追溯已部署业务源码；单仓整理还调整了启动脚本、文档和忽略规则，所以它不是当前整个Git树的替代品。新的PR只提交本任务差异，不将历史代码重复纳入。
 
