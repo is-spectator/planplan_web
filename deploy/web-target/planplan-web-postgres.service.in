@@ -1,0 +1,33 @@
+[Unit]
+Description=PlanPlan Web independent PostgreSQL 15 cluster
+After=network.target
+
+[Service]
+Type=simple
+User=postgres
+Group=postgres
+RuntimeDirectory=planplan-web-postgres
+RuntimeDirectoryMode=0750
+ExecStart=@PG_BIN@/postgres -D /var/lib/planplan-web-postgres/15/data
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+TimeoutStopSec=120
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/planplan-web-postgres /run/planplan-web-postgres
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+CapabilityBoundingSet=
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=planplan-web-postgres
+
+[Install]
+WantedBy=multi-user.target

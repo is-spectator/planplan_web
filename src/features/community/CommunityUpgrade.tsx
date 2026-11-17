@@ -1,0 +1,14 @@
+import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useSession } from '../../auth/SessionProvider'
+import type { MarketTemplate } from './types'
+import type { TemplateDefinition, TemplatePlanState } from '../../lib/contracts'
+import { useOperation } from '../../lib/useOperation'
+import { errorMessage } from '../plans/format'
+import { TemplateStylePreview } from '../templates/TemplateStylePreview'
+export function CommunityUpgrade({ state }: { state: TemplatePlanState }) {
+  const { user, request } = useSession(), { submit, busy, pending, feedback } = useOperation()
+  const [checking, setChecking] = useState(false), [confirmed, setConfirmed] = useState(false)
+  const query = useQuery({ queryKey: ['user', user!.id, 'community-upgrade', state.planId, state.templateVersion], enabled: checking, retry: false, queryFn: async ({ signal }) => { const card = await request<MarketTemplate>(`/v1/market/templates/${encodeURIComponent(state.templateId)}`, { signal }); if (card.templateVersion <= state.templateVersion) return { current: state.definition, next: card.definition, changes: [], expectedVersion: state.config.version, currentTemplateVersion: state.templateVersion, compatible: true as const }; return request<{ current: TemplateDefinition; next: TemplateDefinition; changes: string[]; expectedVersion: number; currentTemplateVersion: number; compatible: true }>(`/v1/plans/${state.planId}/community-upgrade?targetVersion=${card.templateVersion}`, { signal }) } })
+  return <section className="plan-notice"><div className="plan-section-heading"><h2>社区模板 · 当前版本 {state.templateVersion}</h2><button className="text-link" type="button" disabled={query.isFetching} onClick={() => { setChecking(true); void query.refetch() }}>检查模板更新</button></div><p>作者发布新版本后，你的计划仍保留当前版本。只有确认采用更新才会改变模板。</p>{checking && query.isPending && <p role="status">正在检查更新…</p>}{checking && query.isError && <p role="alert">{errorMessage(query.error)}</p>}{query.data && query.data.next.version <= state.templateVersion && <p>已使用当前公开版本。</p>}{query.data && query.data.next.version > state.templateVersion && <><h3>版本 {query.data.currentTemplateVersion} → {query.data.next.version}</h3><ul>{query.data.changes.map((change, index) => <li key={index}>{change}</li>)}</ul><TemplateStylePreview definition={query.data.next} /><p>已有记录保留原值，新可选项目不补写历史记录。模板建议不会自动开启。</p><label className="definition-check"><input type="checkbox" checked={confirmed} onChange={(event) => setConfirmed(event.target.checked)} />我已核对修改，采用这个兼容版本</label><button className="button primary" disabled={busy || pending || !confirmed} onClick={async () => { const result = await submit([{ type: 'upgrade_community_template', planId: state.planId, targetVersion: query.data!.next.version, expectedVersion: query.data!.expectedVersion }]); if (result) { setChecking(false); setConfirmed(false) } }}>确认采用更新</button></>}{feedback}</section>
+}

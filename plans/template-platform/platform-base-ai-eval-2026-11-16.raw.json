@@ -1,0 +1,4318 @@
+{
+  "metadata": {
+    "provider": "openrouter",
+    "attempts": 184,
+    "blockedReason": "rate_limited",
+    "intervalMs": 4000,
+    "dataset": "d1437247c5678907dc2c40bb6772c0149f31ff8d0852740b3bc22173ac427d9e",
+    "prompt": "c73bc655368b3aed0791abb3c8b5be1677da7e0a7f0590bf577787fd3e1038ef",
+    "protocol": "65717cf870fc8872927a690093c0f1da9986f1d6f7c57583c7bd8dceb93b4ef2",
+    "runtime": {
+      "prompt": "c73bc655368b3aed0791abb3c8b5be1677da7e0a7f0590bf577787fd3e1038ef",
+      "protocol": "65717cf870fc8872927a690093c0f1da9986f1d6f7c57583c7bd8dceb93b4ef2",
+      "dataset": "d1437247c5678907dc2c40bb6772c0149f31ff8d0852740b3bc22173ac427d9e",
+      "caseIds": [
+        "A001",
+        "A002",
+        "A003",
+        "A004",
+        "A005",
+        "A006",
+        "A007",
+        "A008",
+        "A009",
+        "A010",
+        "A011",
+        "A012",
+        "A013",
+        "A014",
+        "A015",
+        "A016",
+        "A017",
+        "A018",
+        "A019",
+        "A020",
+        "A021",
+        "A022",
+        "A023",
+        "A024",
+        "A025",
+        "A026",
+        "A027",
+        "A028",
+        "A029",
+        "A030",
+        "A031",
+        "A032",
+        "A033",
+        "A034",
+        "A035",
+        "A036",
+        "A037",
+        "A038",
+        "A039",
+        "A040",
+        "C001",
+        "C002",
+        "C003",
+        "C004",
+        "C005",
+        "C006",
+        "C007",
+        "C008",
+        "C009",
+        "C010",
+        "C011",
+        "C012",
+        "C013",
+        "C014",
+        "C015",
+        "C016",
+        "C017",
+        "C018",
+        "C019",
+        "C020",
+        "C021",
+        "C022",
+        "C023",
+        "C024",
+        "C025",
+        "C026",
+        "C027",
+        "C028",
+        "C029",
+        "C030",
+        "C031",
+        "C032",
+        "C033",
+        "C034",
+        "C035",
+        "C036",
+        "C037",
+        "C038",
+        "C039",
+        "C040",
+        "D001",
+        "D002",
+        "D003",
+        "D004",
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020",
+        "F021",
+        "F022",
+        "F023",
+        "F024",
+        "F025",
+        "F026",
+        "F027",
+        "F028",
+        "F029",
+        "F030",
+        "F031",
+        "F032",
+        "F033",
+        "F034",
+        "F035",
+        "F036",
+        "F037",
+        "F038",
+        "F039",
+        "F040",
+        "F041",
+        "F042",
+        "F043",
+        "F044",
+        "F045",
+        "F046",
+        "F047",
+        "F048",
+        "F049",
+        "F050",
+        "F051",
+        "F052",
+        "F053",
+        "F054",
+        "F055",
+        "F056",
+        "F057",
+        "F058",
+        "F059",
+        "F060",
+        "F061",
+        "F062",
+        "F063",
+        "F064",
+        "F065",
+        "F066",
+        "F067",
+        "F068",
+        "F069",
+        "F070",
+        "F071",
+        "F072",
+        "F073",
+        "F074",
+        "F075",
+        "F076",
+        "F077",
+        "F078",
+        "F079",
+        "F080",
+        "G001",
+        "G002",
+        "G003",
+        "G004",
+        "G005",
+        "G006",
+        "G007",
+        "G008",
+        "G009",
+        "G010",
+        "G011",
+        "G012",
+        "G013",
+        "G014",
+        "G015",
+        "G016",
+        "G017",
+        "G018",
+        "G019",
+        "G020",
+        "G021",
+        "G022",
+        "G023",
+        "G024",
+        "G025",
+        "G026",
+        "G027",
+        "G028",
+        "G029",
+        "G030",
+        "G031",
+        "G032",
+        "G033",
+        "G034",
+        "G035",
+        "G036",
+        "G037",
+        "G038",
+        "G039",
+        "G040",
+        "K001",
+        "K002",
+        "K003",
+        "K004",
+        "K005",
+        "L001",
+        "L002",
+        "L003",
+        "M001",
+        "M002",
+        "Q001",
+        "Q002",
+        "Q003",
+        "Q004",
+        "Q005",
+        "Q006",
+        "Q007",
+        "Q008",
+        "Q009",
+        "Q010",
+        "Q011",
+        "Q012",
+        "Q013",
+        "Q014",
+        "Q015",
+        "Q016",
+        "Q017",
+        "Q018",
+        "Q019",
+        "Q020",
+        "Q021",
+        "Q022",
+        "Q023",
+        "Q024",
+        "Q025",
+        "Q026",
+        "Q027",
+        "Q028",
+        "Q029",
+        "Q030",
+        "Q031",
+        "Q032",
+        "Q033",
+        "Q034",
+        "Q035",
+        "Q036",
+        "Q037",
+        "Q038",
+        "Q039",
+        "Q040",
+        "Q041",
+        "Q042",
+        "Q043",
+        "Q044",
+        "Q045",
+        "Q046",
+        "Q047",
+        "Q048",
+        "Q049",
+        "Q050",
+        "S001",
+        "S002",
+        "S003",
+        "S004",
+        "S005",
+        "S006",
+        "S007",
+        "S008",
+        "S009",
+        "S010",
+        "S011",
+        "S012",
+        "S013",
+        "S014",
+        "S015",
+        "S016",
+        "S017",
+        "S018",
+        "S019",
+        "S020",
+        "S021",
+        "S022",
+        "S023",
+        "S024",
+        "S025",
+        "S026",
+        "S027",
+        "S028",
+        "S029",
+        "S030",
+        "S031",
+        "S032",
+        "S033",
+        "S034",
+        "S035",
+        "S036",
+        "S037",
+        "S038",
+        "S039",
+        "S040",
+        "S041",
+        "S042",
+        "S043",
+        "S044",
+        "S045",
+        "S046",
+        "S047",
+        "S048",
+        "S049",
+        "S050",
+        "S051",
+        "S052",
+        "S053",
+        "S054",
+        "S055",
+        "S056",
+        "S057",
+        "S058",
+        "S059",
+        "S060",
+        "W001",
+        "W002",
+        "W003",
+        "W004",
+        "W005",
+        "W006"
+      ],
+      "caseCount": 330,
+      "outputMode": "compact",
+      "requestTimeoutMs": 60000
+    },
+    "model": "baidu/ernie-5.5-flash-preview:free",
+    "review": {
+      "version": "v1.1-query-oracles",
+      "status": "draft",
+      "productReviewer": null,
+      "testReviewer": null,
+      "reviewedAt": null
+    },
+    "revision": "local-unrecorded"
+  },
+  "gates": {
+    "keyRate": 0.817258883248731,
+    "oneTurnRate": 0.9774436090225563,
+    "wrongWrites": 0,
+    "queryPassed": 0,
+    "queryTotal": 55,
+    "passed": false
+  },
+  "results": [
+    {
+      "id": "D001",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5576,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "D002",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8711,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "好的，这几项不保存了。",
+      "cards": []
+    },
+    {
+      "id": "D003",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4663,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "D004",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6413,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "W001",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9347,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「阅读」计划：每周 4 天，每天累计至少 20 分钟算达标。统计周为周一至周日。本周从 2026-10-31 开始，可用 2 天，首周目标按 2 天算，下周起每周 4 天。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "W002",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 10846,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「阅读」计划：每周 4 天，每天累计至少 20 分钟算达标。统计周为周一至周日。本周从 2026-10-31 开始，可用 2 天，首周目标按 2 天算，下周起每周 4 天。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "W003",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7074,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「阅读」计划：每周 4 天，每天累计至少 20 分钟算达标。统计周为周一至周日。目标从 2026-11-02 开始，本周只记录时长，不评价达标。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "W004",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3675,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "好的，这几项不保存了。",
+      "cards": []
+    },
+    {
+      "id": "W005",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8761,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「阅读」计划：每周 2 天，每天累计至少 20 分钟算达标。统计周为周一至周日。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "W006",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9013,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把目标改为每周 2 天，只在本周生效。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F001",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5100,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F002",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6025,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F003",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7377,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F004",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7316,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F005",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8182,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F006",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7302,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F007",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7203,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F008",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7613,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F009",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 12026,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F010",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9473,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F011",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 2610,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F012",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6144,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F013",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7992,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F014",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7384,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F015",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9309,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F016",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7516,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F017",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4937,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F018",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7785,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F019",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8664,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F020",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7056,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F021",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7588,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F022",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8094,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F023",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 12531,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F024",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7072,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F025",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3506,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F026",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6481,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F027",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6334,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F028",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8198,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F029",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 11229,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F030",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6983,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F031",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4004,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F032",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7682,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F033",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8052,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F034",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7263,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F035",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7953,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F036",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7144,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F037",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7061,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F038",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6623,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F039",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7311,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F040",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9724,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F041",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9383,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F042",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7233,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F043",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7426,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F044",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7554,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F045",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 15005,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，3 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F046",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7126,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，3 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F047",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6841,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F048",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3841,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F049",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5003,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F050",
+      "pass": false,
+      "reason": "第 1 轮：没有找到 {\"k\":\"expense\",\"yuan\":88,\"category\":\"学习\",\"date\":\"2026-10-26\"}；实际 {\"created\":[[\"expense\",88,\"购物\",\"2026-10-26\"],[\"expense\",20,\"餐饮\",\"2026-10-26\"]],\"edited\":0,\"deleted\":0,\"plans\":0,\"changes\":0,\"segs\":[],\"clarify\":false,\"query\":[]}",
+      "latencyMs": 10631,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F051",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 11068,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F052",
+      "pass": false,
+      "reason": "第 1 轮：期望保存 1 条，实际 {\"created\":[],\"edited\":0,\"deleted\":0,\"plans\":0,\"changes\":0,\"segs\":[],\"clarify\":false,\"query\":[]}",
+      "latencyMs": 5915,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "没有找到对应的原支出。退款需要关联一笔已记录的支出，可以先补录原消费，再在它的详情里发起退款。",
+      "cards": []
+    },
+    {
+      "id": "F053",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7382,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F054",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8279,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F055",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6733,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F056",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6233,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F057",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4025,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F058",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7416,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F059",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 10463,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F060",
+      "pass": false,
+      "reason": "第 1 轮：没有找到 {\"k\":\"expense\",\"yuan\":50,\"category\":\"学习\",\"date\":\"2026-10-26\"}；实际 {\"created\":[[\"expense\",50,\"购物\",\"2026-10-26\"],[\"study\",30,null,\"2026-10-26\"]],\"edited\":0,\"deleted\":0,\"plans\":0,\"changes\":0,\"segs\":[],\"clarify\":false,\"query\":[]}",
+      "latencyMs": 11072,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F061",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4890,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F062",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3776,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F063",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7340,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F064",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9724,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F065",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7936,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F066",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4745,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F067",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6154,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F068",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7314,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F069",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7655,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F070",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8202,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F071",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8102,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F072",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7791,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F073",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7256,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F074",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6701,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F075",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7074,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F076",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7022,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F077",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7421,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F078",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 10017,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F079",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8370,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "F080",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5170,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S001",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7775,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S002",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9543,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S003",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 10922,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S004",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4897,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S005",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4689,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S006",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7265,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S007",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6800,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S008",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 11821,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S009",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8994,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S010",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 2819,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S011",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7892,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S012",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 10515,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S013",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8038,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S014",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5551,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S015",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6777,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S016",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7055,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S017",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7411,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S018",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 11133,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S019",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5850,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S020",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3973,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S021",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8110,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S022",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7388,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S023",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6848,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S024",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7449,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S025",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9627,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S026",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 19737,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S027",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5493,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S028",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4603,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S029",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3954,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S030",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6015,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S031",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8714,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S032",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5569,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S033",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6310,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S034",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8748,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S035",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 15422,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S036",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 10194,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S037",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3284,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "这次阅读多长时间？",
+      "cards": [
+        "clarify"
+      ]
+    },
+    {
+      "id": "S038",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 11003,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "记到哪个计划？这次多长时间也一起告诉我。",
+      "cards": [
+        "clarify"
+      ]
+    },
+    {
+      "id": "S039",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 14223,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "这次阅读多长时间？",
+      "cards": [
+        "clarify"
+      ]
+    },
+    {
+      "id": "S040",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 2616,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "「阅读」10月26日已经记了 45 分钟。要补记 15 分钟，还是修改已有记录？",
+      "cards": [
+        "clarify"
+      ]
+    },
+    {
+      "id": "S041",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5094,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "是哪天的？",
+      "cards": [
+        "clarify"
+      ]
+    },
+    {
+      "id": "S042",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7186,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "这次是多少分钟？请给一个整数分钟。",
+      "cards": [
+        "clarify"
+      ]
+    },
+    {
+      "id": "S043",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7362,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "这次英语学习多长时间？",
+      "cards": [
+        "clarify"
+      ]
+    },
+    {
+      "id": "S044",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6337,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "这次英语学习多长时间？",
+      "cards": [
+        "clarify"
+      ]
+    },
+    {
+      "id": "S045",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8000,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S046",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8540,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S047",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5369,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S048",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7576,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S049",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 11588,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S050",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5970,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S051",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3625,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S052",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6696,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S053",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7541,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S054",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 11400,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了，2 条都已保存。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S055",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9012,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S056",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3818,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S057",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7422,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S058",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9293,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S059",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7115,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "S060",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6118,
+      "executedOneTurn": true,
+      "wrongFactWrites": 0,
+      "reply": "记好了。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G001",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 14205,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建好「日常记账」，现在就可以记。预算想设的时候再告诉我。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G002",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8608,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建好「日常记账」，现在就可以记。预算想设的时候再告诉我。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G003",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4432,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建好「日常记账」，月预算 ¥3,000，从本月起生效。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G004",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5372,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建好「日常记账」，月预算 ¥2,000，从本月起生效。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G005",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7258,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「阅读」计划：每周 5 天，每天累计至少 20 分钟算达标。统计周为周一至周日。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G006",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 10353,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「阅读」计划，现在就可以记录时长。想定目标的话，告诉我每周几天、每天多少分钟。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G007",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8067,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「阅读」计划：每周 3 天。每天至少多少分钟算一天达标？告诉我就能开始统计达标天数，现在也可以先记录时长。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G008",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 11493,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「阅读」计划：每周 7 天，每天累计至少 30 分钟算达标。统计周为周一至周日。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G009",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6743,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「英语学习」计划：每周 4 天，每天累计至少 30 分钟算达标。统计周为周一至周日。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G010",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4342,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「英语学习」计划，现在就可以记录时长。想定目标的话，告诉我每周几天、每天多少分钟。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G011",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3796,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "可以帮你从两个方向开始：记录支出，看看钱花在哪里；或者设置一个月度预算，控制每月总花费。",
+      "cards": []
+    },
+    {
+      "id": "G012",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7397,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "目前还不能记录跑步次数；可以先从市场选用支持的模板，或创建阅读/学习计划。",
+      "cards": []
+    },
+    {
+      "id": "G013",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 12941,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把月预算设为 ¥3,500，从本月（10 月）起生效。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G014",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6434,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把月预算设为 ¥4,000，从11 月起生效，本月不变。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G015",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5368,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把月预算设为 ¥2,500，只在本月生效。11 月起恢复原来的设置。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G016",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7698,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把月预算设为 ¥2,800，只在本月生效。11 月起恢复原来的设置。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G017",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5470,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把月预算设为 ¥3,200，从本月（10 月）起生效。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G018",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9440,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把目标改为每周 4 天，从本周起生效。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G019",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8710,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把目标改为每天至少 30 分钟，从本周起生效。本周已有的记录按新门槛重新计算。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G020",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6670,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把目标改为每周 3 天，从11月2日这一周起生效，本周不变。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G021",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 14796,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把目标改为每天至少 25 分钟，从本周起生效。本周已有的记录按新门槛重新计算。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G022",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4844,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把目标改为每周 5 天，从本周起生效。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G023",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9925,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把目标改为每周 6 天，只在本周生效。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G024",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5410,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把目标改为每天至少 30 分钟，从本周起生效。本周已有的记录按新门槛重新计算。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G025",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 3228,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已把目标改为每周 4 天，从本周起生效。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G026",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9695,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "你已经有「日常记账」了，直接说“午饭 20 元”就能记。",
+      "cards": [
+        "plan"
+      ]
+    },
+    {
+      "id": "G027",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 7812,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已经有进行中的「阅读」了。要调整目标可以直接说，比如“从下周起改成每周 3 天”；要另建一个，请给它起个不同的名字。",
+      "cards": [
+        "plan"
+      ]
+    },
+    {
+      "id": "G028",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5640,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已建立「睡前阅读」计划：每周 7 天，每天累计至少 15 分钟算达标。统计周为周一至周日。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G029",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 9621,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已改名为「英语听力」，目标和记录不变。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G030",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 6801,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已归档「英语学习」。历史仍可查看和导出，新的记录不会自动进入这个计划。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G031",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 5319,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "页面已调整，数据和统计不变。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G032",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 13633,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已改名为「课外阅读」，目标和记录不变。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G033",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 8245,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "已归档「英语学习」。历史仍可查看和导出，新的记录不会自动进入这个计划。",
+      "cards": [
+        "receipt"
+      ]
+    },
+    {
+      "id": "G034",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 2012,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "G035",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 2500,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "G036",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "G037",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "G038",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "G039",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "G040",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q001",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q002",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q003",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q004",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q005",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q006",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q007",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q008",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q009",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q010",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q011",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q012",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q013",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q014",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q015",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q016",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q017",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q018",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q019",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q020",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q021",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q022",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q023",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q024",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q025",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 13,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q026",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q027",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q028",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q029",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q030",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q031",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q032",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q033",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q034",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q035",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q036",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q037",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q038",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q039",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q040",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q041",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q042",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q043",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q044",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q045",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q046",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q047",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q048",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q049",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "Q050",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A001",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A002",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A003",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A004",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A005",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A006",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A007",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A008",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A009",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A010",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A011",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A012",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A013",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A014",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A015",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A016",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A017",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A018",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A019",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A020",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A021",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A022",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A023",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A024",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A025",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A026",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A027",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A028",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A029",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A030",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A031",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A032",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A033",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A034",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A035",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A036",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A037",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A038",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A039",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "A040",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C001",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C002",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C003",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C004",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C005",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C006",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C007",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 13,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C008",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 14,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C009",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 14,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C010",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C011",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C012",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 13,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C013",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C014",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 13,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C015",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C016",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 13,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C017",
+      "pass": true,
+      "reason": "",
+      "latencyMs": 4,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "一次最多记 10 条，这次什么都没有保存。请分成几次发给我。",
+      "cards": []
+    },
+    {
+      "id": "C018",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C019",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C020",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C021",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C022",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C023",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C024",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C025",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C026",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C027",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C028",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C029",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C030",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C031",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C032",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C033",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C034",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C035",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C036",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C037",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C038",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C039",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 12,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "C040",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "M001",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "M002",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "K001",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "K002",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "K003",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "K004",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "K005",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "L001",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "L002",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 10,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    },
+    {
+      "id": "L003",
+      "pass": false,
+      "reason": "第 1 轮：模型服务不可用",
+      "latencyMs": 11,
+      "executedOneTurn": false,
+      "wrongFactWrites": 0,
+      "reply": "",
+      "cards": [
+        "error"
+      ]
+    }
+  ]
+}

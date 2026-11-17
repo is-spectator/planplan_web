@@ -1,0 +1,74 @@
+# Add only this server block. Do not replace the host's nginx.conf or certificates.
+# DNS-only mode. A proxied Cloudflare deployment needs separately validated
+# trusted real-IP CIDRs and cache bypass rules; do not trust arbitrary headers.
+server {
+    listen 80;
+    server_name @DOMAIN@;
+    access_log off;
+    return 308 https://@DOMAIN@$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name @DOMAIN@;
+    ssl_certificate @CERT_CHAIN@;
+    ssl_certificate_key @CERT_KEY@;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    @TRUSTED_PROXY_INCLUDE@
+    root /opt/planplan-web/current/web;
+    index index.html;
+    access_log off;
+    # nginx error logs may include request URLs; no raw request logs for this app.
+    error_log /dev/null crit;
+    client_max_body_size 256k;
+    add_header X-Content-Type-Options nosniff always;
+    add_header Referrer-Policy no-referrer always;
+    add_header X-Frame-Options DENY always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'" always;
+
+    location ~ ^/(v1(?:/|$)|legal(?:/|$)|healthz$|readyz$) {
+        proxy_pass http://127.0.0.1:8789;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header Connection "";
+        proxy_connect_timeout 3s;
+        proxy_read_timeout 75s;
+        proxy_send_timeout 75s;
+        proxy_buffering off;
+        proxy_request_buffering on;
+        proxy_cache off;
+        proxy_no_cache 1;
+        proxy_cache_bypass 1;
+        proxy_next_upstream off;
+        proxy_hide_header Cache-Control;
+        add_header Cache-Control "no-store, private" always;
+        add_header X-Content-Type-Options nosniff always;
+        add_header Referrer-Policy no-referrer always;
+    }
+    location ^~ /assets/ {
+        try_files $uri =404;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        add_header X-Content-Type-Options nosniff always;
+        add_header Referrer-Policy no-referrer always;
+        add_header X-Frame-Options DENY always;
+    }
+    location = /index.html {
+        add_header Cache-Control "no-store" always;
+        add_header X-Content-Type-Options nosniff always;
+        add_header Referrer-Policy no-referrer always;
+        add_header X-Frame-Options DENY always;
+        add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'" always;
+    }
+    location / {
+        try_files $uri $uri/ /index.html;
+        add_header Cache-Control "no-store" always;
+        add_header X-Content-Type-Options nosniff always;
+        add_header Referrer-Policy no-referrer always;
+        add_header X-Frame-Options DENY always;
+        add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'" always;
+    }
+    location ~ /\. { deny all; }
+}

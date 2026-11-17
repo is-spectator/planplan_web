@@ -1,0 +1,18 @@
+[Unit]
+Description=PlanPlan Web database maintenance (%i)
+After=planplan-web-postgres.service
+
+[Service]
+Type=oneshot
+User=planplan-web-backup
+Group=planplan-web-backup
+ExecStart=/opt/planplan-web/current/deploy/maintenance.sh %i
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/planplan-web-backups
+TimeoutStartSec=15min
+StandardOutput=journal
+StandardError=journal

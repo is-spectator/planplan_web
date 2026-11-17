@@ -1,0 +1,67 @@
+/* Source: is-spectator/planplan/design/tokens.json @ 1fc1bc5136af4f4e69cc81ef74863fbe34b208d2. */
+:root,
+:root[data-theme="light"] {
+  --background: #F6F3EE;
+  --card: #FFFFFF;
+  --card-border: #ECE7DF;
+  --divider: #F0EBE3;
+  --text-primary: #1D1B18;
+  --text-secondary: #6B665E;
+  --text-tertiary: #4A463F;
+  --track: #F2EEE7;
+  --chip: #F8F5F0;
+  --user-bubble: #E6DED1;
+  --ledger: #C8631F;
+  --ledger-bar: #E8BE9A;
+  --ledger-soft: #FBEEE2;
+  --ledger-text: #A8531A;
+  --study: #2E8C80;
+  --study-soft: #E3F2EF;
+  --study-text: #1F6B61;
+  --good: #2F6E45;
+  --good-soft: #E6F2E9;
+  --warn: #8A4A12;
+  --warn-soft: #FBEEE2;
+  --danger: #A8341F;
+  --danger-soft: #FBE8E4;
+  --link: #2B4C7E;
+  --primary-button: #1D1B18;
+  --primary-button-text: #FFFFFF;
+}
+:root[data-theme="dark"] {
+  --background: #141311;
+  --card: #201E1B;
+  --card-border: #2E2B26;
+  --divider: #2A2723;
+  --text-primary: #F4F0E8;
+  --text-secondary: #B5AEA2;
+  --text-tertiary: #D6D0C6;
+  --track: #2E2B26;
+  --chip: #26231F;
+  --user-bubble: #3A352E;
+  --ledger: #F0914A;
+  --ledger-bar: #9A5C33;
+  --ledger-soft: #3A2A1D;
+  --ledger-text: #F0914A;
+  --study: #4DB3A5;
+  --study-soft: #1C3330;
+  --study-text: #7FD1C5;
+  --good: #7DD3A0;
+  --good-soft: #1F3328;
+  --warn: #F2B36B;
+  --warn-soft: #3A2A1D;
+  --danger: #F08A76;
+  --danger-soft: #3A201B;
+  --link: #8FB4F0;
+  --primary-button: #F4F0E8;
+  --primary-button-text: #141311;
+}
+:root {
+  --radius-card: 20px;
+  --radius-hero: 22px;
+  --radius-chip: 999px;
+  --radius-button: 16px;
+  --radius-icon: 12px;
+  --font-ui: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-number: "Manrope", var(--font-ui);
+}

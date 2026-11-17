@@ -1,0 +1,22 @@
+node_modules/
+dist/
+*.local
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+playwright-report/
+test-results/
+.DS_Store
+__pycache__/
+*.pyc
+
+# Local backend state, generated identities and evaluation artifacts.
+.data/
+server/src/ai/build-fingerprint.json
+server/src/ai/creation-build-fingerprint.json
+server/evals/reports/
+
+# Historical raw reports/screenshots stay in the private local archive.
+plans/template-platform/evidence/*
+!plans/template-platform/evidence/README.md

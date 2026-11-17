@@ -1,0 +1,30 @@
+import { randomUUID } from 'node:crypto';
+import { expect, it } from 'vitest';
+import { setup } from './helpers.js';
+import { createApp } from '../src/api/app.js';
+import { issueToken } from '../src/api/auth.js';
+import { FakeLlm } from '../src/ai/llm.js';
+import { execute } from '../src/services/engine.js';
+const at='2026-11-17T12:00:00+08:00';
+it('HTTP generic version check and study bounded paging keep legacy reads compatible',async()=>{
+ const c=await setup(), auth={jwtSecret:new TextEncoder().encode('synthetic-readiness-api-only-key'),appleAudience:null,devLogin:false};
+ const app=createApp(c.db,new FakeLlm(()=>({intent:'smalltalk'})),auth),token=await issueToken(auth,c.userId,0),headers={authorization:`Bearer ${token}`,'X-PlanPlan-Capabilities':'generic-record-v1,reading-template-v1,generic-template-v2,chat-recovery-v1'};
+ const ctx={...c.at(at),genericCapability:true,templateCapability:true};
+ const adopted=await execute(c.db,ctx,randomUUID(),[{type:'adopt_template',templateId:'official.water',templateVersion:1}]);const id=adopted.templatePlan!.planId;
+ await execute(c.db,ctx,randomUUID(),[{type:'configure_generic_plan',planId:id,expectedVersion:1,patch:{},completeSetup:true}]);
+ const first=await (await app.request(`/v1/plans/${id}/generic?date=2026-11-17&limit=20`,{headers})).json();
+ expect(first.totalRecords).toBe(0);
+ await execute(c.db,ctx,randomUUID(),[{type:'add_generic_record',planId:id,values:{date:'2026-11-17',amountMl:250}}]);
+ const stale=await app.request(`/v1/plans/${id}/generic?date=2026-11-17&offset=20&expectedDataVersion=${first.dataVersion}`,{headers});expect(stale.status).toBe(409);expect(await stale.json()).toMatchObject({error:{details:{kind:'history_changed'}}});
+ const study=await c.run(at,{type:'create_study',name:'SQL分页',activity:'阅读'});const sid=(study.items[0] as any).plan.id;
+ for(let i=0;i<3;i++)await c.run(at,{type:'add_study',planId:sid,minutes:10,date:'2026-11-17'});
+ const page=await (await app.request(`/v1/plans/${sid}/study?week=2026-11-16&limit=1&offset=1`,{headers})).json();expect(page.records).toHaveLength(1);expect(page.totalRecords).toBe(3);expect(page.stats.totalMinutes).toBe(30);
+ const legacy=await (await app.request(`/v1/plans/${sid}/study?week=2026-11-16`,{headers})).json();expect(legacy.records).toHaveLength(3);
+});
+it('HTTP goal reviewedOn survives parsing and stale day rejects atomically',async()=>{
+ const c=await setup(),auth={jwtSecret:new TextEncoder().encode('synthetic-readiness-api-only-key'),appleAudience:null,devLogin:false};const app=createApp(c.db,new FakeLlm(()=>({intent:'smalltalk'})),auth),token=await issueToken(auth,c.userId,0);
+ const ctx={...c.at(at),genericCapability:true};const adopted=await execute(c.db,ctx,randomUUID(),[{type:'adopt_template',templateId:'official.water',templateVersion:1}]);
+ const headers={authorization:`Bearer ${token}`,'Content-Type':'application/json','X-PlanPlan-Capabilities':'generic-record-v1,generic-template-v2'};
+ const res=await app.request('/v1/operations',{method:'POST',headers,body:JSON.stringify({clientOpId:randomUUID(),inputAt:at,actions:[{type:'configure_generic_plan',planId:adopted.templatePlan!.planId,expectedVersion:1,reviewedOn:'2026-11-16',patch:{values:{dailyGoalMl:2000}},completeSetup:true}]})});expect(res.status).toBe(409);expect(await res.json()).toMatchObject({error:{details:{kind:'goal_period_changed',today:'2026-11-17'}}});
+ expect(await c.db.query('SELECT plan_id FROM generic_goal_segments')).toHaveLength(0);
+});

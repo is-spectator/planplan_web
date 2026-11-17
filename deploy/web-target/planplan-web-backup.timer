@@ -1,0 +1,11 @@
+[Unit]
+Description=PlanPlan Web daily encrypted backup
+
+[Timer]
+OnCalendar=*-*-* 02:00:00 Asia/Shanghai
+RandomizedDelaySec=300
+Persistent=true
+Unit=planplan-web-maintenance@backup.service
+
+[Install]
+WantedBy=timers.target

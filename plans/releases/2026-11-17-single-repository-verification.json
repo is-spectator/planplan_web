@@ -1,0 +1,30 @@
+{
+  "backend": {
+    "files": 76,
+    "passed": 861,
+    "failed": 0,
+    "skipped": 0
+  },
+  "unchangedRuntimeSourceFiles": 91,
+  "byteIdenticalWebOutputs": 18,
+  "sourcePackage": "ea368ed9f31356d7770e3ad5169bb25e581f376d5e90503f1097024459436a49",
+  "typecheckAndBuild": "frontend and backend passed",
+  "lint": "passed",
+  "localReadiness": {
+    "ok": true,
+    "release": "local"
+  },
+  "officialTemplates": 3,
+  "anonymousMe": 401,
+  "localDataCopy": {
+    "oldFixtureStopped": true,
+    "oldCopyPreserved": true,
+    "filesCompared": 1249,
+    "identicalBeforeStartup": true,
+    "destinationIgnoredByGit": true
+  },
+  "cloudModelCalls": 0,
+  "productionDeployment": "unchanged 9f763547",
+  "stagedSourceFiles": 402,
+  "stagedAudit": "no private configuration, raw evidence, dependencies or data; trailing blank lines normalized"
+}

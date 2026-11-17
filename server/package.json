@@ -1,0 +1,48 @@
+{
+  "name": "planplan-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "tsx scripts/ai-fingerprint.ts && tsx watch src/main.ts",
+    "start": "tsx scripts/ai-fingerprint.ts && tsx src/main.ts",
+    "build": "tsx scripts/ai-fingerprint.ts && tsc -p tsconfig.json",
+    "typecheck": "tsx scripts/ai-fingerprint.ts && tsc -p tsconfig.json --noEmit",
+    "test": "tsx scripts/ai-fingerprint.ts && vitest run --exclude 'dist/**'",
+    "smoke:ai": "tsx scripts/smoke-ai.ts",
+    "eval": "tsx scripts/ai-fingerprint.ts && tsx evals/run.ts",
+    "eval:candidate": "tsx scripts/ai-fingerprint.ts && tsx evals/candidate-run.ts",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:backup": "tsx scripts/database-backup.ts",
+    "db:retry-deletions": "tsx scripts/retry-deletions.ts",
+    "db:restore-drill": "tsx scripts/restore-drill.ts",
+    "ai:versions": "tsx scripts/ai-fingerprint.ts --print",
+    "metrics": "tsx scripts/product-metrics.ts",
+    "perf": "tsx perf/run.ts",
+    "dev:web": "tsx scripts/ai-fingerprint.ts && tsx scripts/web-fixture.ts"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.11",
+    "@hono/node-server": "^2.1.5",
+    "argon2": "^0.45.1",
+    "fflate": "^0.8.3",
+    "hono": "^4.13.14",
+    "jose": "^6.2.13",
+    "nodemailer": "^10.2.1",
+    "openai": "^7.43.0",
+    "pg": "^8.23.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/nodemailer": "^8.0.2",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  },
+  "packageManager": "pnpm@10.33.2"
+}

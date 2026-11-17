@@ -1,0 +1,10 @@
+[Unit]
+Description=PlanPlan Web maximum 28-day local backup retention
+
+[Timer]
+OnCalendar=*-*-* 03:00:00 Asia/Shanghai
+Persistent=true
+Unit=planplan-web-maintenance@prune.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-10-27T01:55:12.680Z",
+  "label": "before-local",
+  "commit": "3393ab3b6a57fe7b6017211b342a0446b8abf691",
+  "scope": "Local service functions only; no HTTP/client rendering/mobile network/provider latency. FakeLlm returns immediately. Not PRD release acceptance.",
+  "environment": {
+    "node": "v23.11.0",
+    "postgres": "17.9 (Homebrew)",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M4 Pro",
+    "cores": 14,
+    "artificialQueryDelayMs": 0
+  },
+  "fixture": {
+    "version": "synthetic-v1",
+    "plans": 100,
+    "records": 10000,
+    "expenses": 6500,
+    "refunds": 500,
+    "studyRecords": 3000,
+    "today": "2026-10-27"
+  },
+  "methodology": {
+    "warmupPerCase": 3,
+    "percentile": "nearest-rank ceil(0.95 * samples)",
+    "readConcurrency": 1,
+    "writesConcurrency": 1,
+    "queryCount": "application SQL calls; excludes transaction begin/advisory lock/commit",
+    "cleanup": "outside timing, records reset to 10000; create starts at 99 plans and ends at 100",
+    "localFeedback": "not measured",
+    "realModelAndNetwork": "not measured"
+  },
+  "results": {
+    "ledger_detail": {
+      "samples": 50,
+      "p50Ms": 22.62104199999999,
+      "p95Ms": 24.289499999999975,
+      "maxMs": 26.741916000000003,
+      "queriesP95": 4,
+      "rowsP95": 7003,
+      "concurrency": 1
+    },
+    "study_detail": {
+      "samples": 50,
+      "p50Ms": 0.7469579999999496,
+      "p95Ms": 0.8942910000000666,
+      "maxMs": 0.9016670000000886,
+      "queriesP95": 6,
+      "rowsP95": 35,
+      "concurrency": 1
+    },
+    "refresh_plan_list": {
+      "samples": 50,
+      "p50Ms": 52.69595799999979,
+      "p95Ms": 59.10487499999999,
+      "maxMs": 63.15558299999975,
+      "queriesP95": 301,
+      "rowsP95": 10300,
+      "concurrency": 1
+    },
+    "query_fake_model": {
+      "samples": 50,
+      "p50Ms": 30.738459000000148,
+      "p95Ms": 33.67845800000032,
+      "maxMs": 34.81620800000019,
+      "queriesP95": 114,
+      "rowsP95": 7412,
+      "concurrency": 1
+    },
+    "record_fake_model": {
+      "samples": 50,
+      "p50Ms": 35.402791000000434,
+      "p95Ms": 42.75595799999974,
+      "maxMs": 92.52566600000046,
+      "queriesP95": 125,
+      "rowsP95": 7320,
+      "concurrency": 1
+    },
+    "create_fake_model": {
+      "samples": 50,
+      "p50Ms": 8.622875000000931,
+      "p95Ms": 10.684000000001106,
+      "maxMs": 18.458040999999866,
+      "queriesP95": 122,
+      "rowsP95": 414,
+      "concurrency": 1
+    }
+  }
+}

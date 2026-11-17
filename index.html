@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="PlanPlan，让记账与学习成为轻松的日常。" />
+    <title>PlanPlan</title>
+    <script>
+      (() => {
+        let theme = 'system'
+        try {
+          const saved = localStorage.getItem('planplan-theme')
+          if (saved === 'light' || saved === 'dark') theme = saved
+        } catch {}
+        const resolved = theme === 'system'
+          ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : theme
+        document.documentElement.dataset.theme = resolved
+        document.documentElement.style.colorScheme = resolved
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useSession } from '../../auth/SessionProvider'
+import { errorMessage } from '../plans/format'
+import { TemplateStylePreview } from '../templates/TemplateStylePreview'
+import type { CommunitySubmission } from './types'
+const eventLabels = { submitted: '提交审核', approved: '审核通过', rejected: '退回修改', published: '发布版本', withdrawn: '撤回送审', unlisted: '作者下架', suspended: '审核暂停展示', restored: '解除暂停' } as const
+interface History { listingId: string; submissions: CommunitySubmission[]; totalSubmissions: number; events: { id: string; kind: keyof typeof eventLabels; at: string; status: string; submissionId: string | null; templateVersion: number | null; reason: string | null }[]; totalEvents: number }
+export function CommunityHistory({ listingId, reviewer = false }: { listingId: string; reviewer?: boolean }) {
+  const { user, request } = useSession()
+  const [open, setOpen] = useState(false), [offset, setOffset] = useState(0)
+  const query = useQuery({ queryKey: ['user', user!.id, 'community-history', listingId, reviewer, offset], enabled: open, queryFn: ({ signal }) => request<History>(`/v1/community/${reviewer ? 'review/' : ''}works/${listingId}/history?limit=20&offset=${offset}`, { signal }) })
+  return <details className="plan-summary community-history" onToggle={(event) => setOpen(event.currentTarget.open)}><summary>查看申请与处理历史</summary>{query.isPending && <p role="status">正在读取历史…</p>}{query.isError && <p role="alert">{errorMessage(query.error)}</p>}{query.data && <><ol className="community-timeline">{query.data.events.map((event) => <li key={event.id}><strong>{eventLabels[event.kind] ?? '状态更新'}{event.templateVersion ? ` · 版本 ${event.templateVersion}` : ''}</strong><time>{new Date(event.at).toLocaleString('zh-CN')}</time>{event.reason && <p>{event.reason}</p>}</li>)}</ol><h3>送审内容快照</h3>{query.data.submissions.map((submission) => <details key={submission.id}><summary>{submission.payload.title} · {new Date(submission.createdAt).toLocaleString('zh-CN')}</summary><p>{submission.payload.description}</p><p>作者署名：{submission.payload.authorName}</p><TemplateStylePreview definition={submission.payload.definition} />{submission.rejectionReason && <p>修改建议：{submission.rejectionReason}</p>}</details>)}{Math.max(query.data.totalEvents, query.data.totalSubmissions) > 20 && <nav className="record-pagination" aria-label="历史分页"><button type="button" className="button plan-secondary" disabled={offset === 0 || query.isFetching} onClick={() => setOffset(Math.max(0, offset - 20))}>上一页</button><span>第 {Math.floor(offset / 20) + 1} 页</span><button type="button" className="button plan-secondary" disabled={offset + 20 >= Math.max(query.data.totalEvents, query.data.totalSubmissions) || query.isFetching} onClick={() => setOffset(offset + 20)}>下一页</button></nav>}</>}</details>
+}

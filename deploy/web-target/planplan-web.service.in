@@ -1,0 +1,39 @@
+[Unit]
+Description=PlanPlan Web independent API
+After=network-online.target planplan-web-postgres.service
+Wants=network-online.target
+Requires=planplan-web-postgres.service
+ConditionPathExists=/etc/planplan-web/secrets/runtime.json
+ConditionPathExists=/etc/planplan-web/legal.json
+
+[Service]
+Type=simple
+User=planplan-web
+Group=planplan-web
+WorkingDirectory=/opt/planplan-web/current/server
+EnvironmentFile=/etc/planplan-web/runtime.env
+ExecStartPre=@NODE_BIN@ dist/scripts/entrypoint.js migrate-check
+ExecStart=@NODE_BIN@ dist/scripts/entrypoint.js serve
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+KillSignal=SIGTERM
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+LockPersonality=yes
+# Node/V8 uses JIT memory; do not add MemoryDenyWriteExecute.
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=planplan-web
+
+[Install]
+WantedBy=multi-user.target

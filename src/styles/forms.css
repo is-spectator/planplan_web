@@ -1,0 +1,32 @@
+.auth-page { max-width: 460px; }
+.auth-page .page-heading { margin-top: 24px; }
+.data-form { display: flex; flex-direction: column; gap: 18px; }
+.data-form label { display: flex; flex-direction: column; gap: 7px; font-size: 14px; font-weight: 500; }
+.data-form input, .data-form select, .data-form textarea { width: 100%; min-height: 46px; padding: 10px 13px; border: 1px solid var(--card-border); border-radius: 12px; background: var(--card); color: var(--text-primary); font: inherit; }
+.data-form input:focus, .data-form select:focus { outline: 2px solid var(--study); outline-offset: 1px; }
+.data-form .check-label { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 5px; font-size: 12px; }
+.check-label input { width: 20px; min-height: 20px; accent-color: var(--study); }
+.check-label a { color: var(--link); text-decoration: underline; }
+.input-with-action { display: flex; gap: 8px; }
+.input-with-action input { min-width: 0; }
+.input-with-action button { flex-shrink: 0; }
+.field-hint { color: var(--text-secondary); font-size: 12px; font-weight: 400; line-height: 1.8; }
+.button:disabled { opacity: .5; cursor: not-allowed; }
+.secondary { background: var(--card); color: var(--text-primary); border: 1px solid var(--card-border); }
+.secondary:hover { background: var(--track); }
+.danger-button { color: var(--danger); background: var(--danger-soft); }
+.inline-feedback { margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: var(--track); font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.auth-links, .action-row, .account-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.auth-links { justify-content: space-between; }
+.auth-links button, .text-button { min-height: 44px; background: transparent; color: var(--link); padding: 0 4px; font-size: 14px; }
+.consent-section { border-top: 1px solid var(--card-border); padding-top: 28px; }
+.consent-section p { margin: 12px 0; color: var(--text-secondary); line-height: 1.9; font-size: 14px; }
+.consent-section details { margin-bottom: 20px; padding: 16px; border: 1px solid var(--card-border); border-radius: 14px; background: var(--card); }
+.consent-section summary { cursor: pointer; min-height: 30px; font-weight: 500; }
+.confirmation-panel { margin-top: 25px; padding: 22px; background: var(--card); border: 1px solid var(--card-border); border-radius: 18px; }
+.recovery-feedback { padding: 14px 16px; margin-top: 16px; font-size: 14px; border-radius: 14px; background: var(--study-soft); color: var(--study-text); }
+.recovery-feedback.needs-attention { background: var(--warn-soft); color: var(--warn); }
+.recovery-feedback .field-hint { margin-top: 7px; }
+.recovery-feedback .button { font-size: 12px; padding-inline: 14px; }
+.global-feedback { width: min(100% - 40px, 800px); margin: 0 auto; }
+@media(max-width:700px) { .auth-page { width: calc(100% - 40px); } .data-form input, .data-form select { font-size: 16px; } }
