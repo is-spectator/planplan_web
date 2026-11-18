@@ -1,0 +1,57 @@
+{
+  "note": "Protocol CI may skip only these existing live segments. A new test.skip fails the check until this file is reviewed and updated. Counts are not pinned.",
+  "skips": [
+    {
+      "file": "tests/creation-refinement-live.spec.ts",
+      "reason": "需要专用平台合成账号或本轮正常登录会话"
+    },
+    {
+      "file": "tests/creation.spec.ts",
+      "reason": "需要专用创作合成账户"
+    },
+    {
+      "file": "tests/creation.spec.ts",
+      "reason": "需要第二个创作合成账户"
+    },
+    {
+      "file": "tests/functionality.spec.ts",
+      "reason": "需要 PLANPLAN_E2E_EMAIL / PLANPLAN_E2E_PASSWORD 指定隔离测试账户"
+    },
+    {
+      "file": "tests/functionality.spec.ts",
+      "reason": "需要第二个隔离账户检查跨账户隔离"
+    },
+    {
+      "file": "tests/generic.spec.ts",
+      "reason": "需要 PLANPLAN_GENERIC_E2E_EMAIL/PASSWORD 指定独立合成账户"
+    },
+    {
+      "file": "tests/generic.spec.ts",
+      "reason": "需要第二个只读合成账户验证隔离"
+    },
+    {
+      "file": "tests/history-live.spec.ts",
+      "reason": "需要既有合成账户及受保护的本轮正常登录会话路径"
+    },
+    {
+      "file": "tests/manual-handoff.spec.ts",
+      "reason": "需要隔离本地夹具账户"
+    },
+    {
+      "file": "tests/platform-live.spec.ts",
+      "reason": "需要专用平台合成账号"
+    },
+    {
+      "file": "tests/platform-management-live.spec.ts",
+      "reason": "需要平台专用合成账户"
+    },
+    {
+      "file": "tests/refund-snapshot-live.spec.ts",
+      "reason": "需要本轮正常 UI 登录取得的合成账户会话"
+    },
+    {
+      "file": "tests/templates.spec.ts",
+      "reason": "需要 PLANPLAN_TEMPLATE_E2E_EMAIL/PASSWORD 指定可关闭 AI 的隔离账户"
+    }
+  ]
+}

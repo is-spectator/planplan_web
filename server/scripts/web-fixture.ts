@@ -18,7 +18,23 @@ if (process.env.NODE_ENV === 'production' || ['beta', 'production'].includes(pro
 }
 
 // No .env, existing DATABASE_URL, SMTP, or existing server data is loaded here.
-const directory = resolve(dirname(fileURLToPath(import.meta.url)), '../.data/web-fixture');
+// Defaults stay on 8788 and this checkout's data directory. CI sets the env vars
+// so a job does not reuse a developer's running fixture.
+function loopbackOrigin(value: string, name: string): string {
+  let url: URL;
+  try { url = new URL(value); } catch { throw new Error(`${name} must be an exact loopback origin`); }
+  if (url.origin !== value || url.username || url.password || !['127.0.0.1', 'localhost'].includes(url.hostname)) {
+    throw new Error(`${name} must be an exact loopback origin`);
+  }
+  return url.origin;
+}
+const portText = process.env.PLANPLAN_FIXTURE_PORT ?? '8788';
+if (!/^[0-9]+$/.test(portText)) throw new Error('PLANPLAN_FIXTURE_PORT must be a TCP port');
+const port = Number(portText);
+if (port < 1 || port > 65535) throw new Error('PLANPLAN_FIXTURE_PORT must be a TCP port');
+const directory = process.env.PLANPLAN_FIXTURE_DATA_DIR
+  ? resolve(process.env.PLANPLAN_FIXTURE_DATA_DIR)
+  : resolve(dirname(fileURLToPath(import.meta.url)), '../.data/web-fixture');
 await mkdir(directory, { recursive: true });
 const db = await openDb(`pglite://${directory}`);
 const mailbox: { email: string; code: string; purpose: EmailPurpose; createdAt: string }[] = [];
@@ -27,7 +43,10 @@ const password = 'PlanPlan-local-test-2026';
 const auth: AuthConfig = {
   jwtSecret: new TextEncoder().encode('local-web-fixture-public-signing-key-do-not-deploy'),
   appleAudience: null, devLogin: false,
-  webAllowedOrigins: ['http://127.0.0.1:5173', 'http://localhost:5173', 'http://127.0.0.1:4173', 'http://127.0.0.1:8788'],
+  webAllowedOrigins: [...new Set([
+    'http://127.0.0.1:5173', 'http://localhost:5173', 'http://127.0.0.1:4173', `http://127.0.0.1:${port}`,
+    ...(process.env.PLANPLAN_FIXTURE_WEB_ORIGIN ? [loopbackOrigin(process.env.PLANPLAN_FIXTURE_WEB_ORIGIN, 'PLANPLAN_FIXTURE_WEB_ORIGIN')] : []),
+  ])],
   cookieSecure: false,
   email: {
     secret: new TextEncoder().encode('local-web-fixture-public-email-key-do-not-deploy'),
@@ -67,8 +86,8 @@ app.get('/__fixture/mail', c => {
   return c.json({ messages: mailbox.filter(message => message.email === email) });
 });
 
-const server = serve({ fetch: app.fetch, hostname: '127.0.0.1', port: 8788 }, () => {
-  console.log(JSON.stringify({ event: 'web_fixture_started', url: 'http://127.0.0.1:8788', model: realModel ? 'real' : 'stub', accounts }));
+const server = serve({ fetch: app.fetch, hostname: '127.0.0.1', port }, () => {
+  console.log(JSON.stringify({ event: 'web_fixture_started', url: `http://127.0.0.1:${port}`, model: realModel ? 'real' : 'stub', accounts }));
 });
 let stopping = false;
 for (const signal of ['SIGTERM', 'SIGINT'] as const) process.on(signal, () => {
