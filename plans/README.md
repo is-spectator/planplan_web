@@ -2,7 +2,7 @@
 
 **当前代码统一在 `is-spectator/planplan_web`：网页 `src/`、后端 `server/`、部署 `deploy/`。** 默认主分支是 `main`；`planplan` 仅为参考来源。历史报告里的相邻checkout是当时记录，当前开发／PR入口以根README及[单仓交付TODO](todos/2026-11-17-single-repository.md)为准。
 
-更新：2026-11-18（Asia/Shanghai；PR-001 已提交评审，尚未合并或部署，线上状态未改变）
+更新：2026-11-18（Asia/Shanghai；PR-001 已合并到 main `4c0bd70`，尚未部署，线上状态未改变）
 
 **最新线上候选：功能修复9f763547已部署。** 歧义删除、创作时长、历史分页／游标及午夜提交保护已安装，并补齐部署前发现的跨类型否定删除缺口。同包目标PG15.19为861/861，公网83/83；仅更新版本配置，继续百度、无fallback。创作20/20身份一致；最终基础36通过、1非法输出、293未执行，完整及人工门槛仍未通过。主清单12/18不变，部署TODO4/4，详见[精确上线记录](releases/2026-11-17-trial-readiness-functions.md)。
 
