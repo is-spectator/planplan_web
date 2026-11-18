@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSession } from '../../auth/SessionProvider'
 import { PageState } from '../../components/PageState'
 import { OriginalMessage } from '../../components/OriginalMessage'
-import { dismissManual, setManualIntent, useManualIntent } from '../../lib/manual-handoff'
+import { dismissManual, getManualIntent, setManualIntent, useManualIntent } from '../../lib/manual-handoff'
 import { useRecovery } from '../../lib/RecoveryProvider'
 import type { OperationResult, TemplateDefinition } from '../../lib/contracts'
 import { useOperation } from '../../lib/useOperation'
@@ -41,14 +41,23 @@ export function CreationWorkspace({ draftId }: { draftId: string }) {
   const end = useRef<HTMLDivElement>(null)
   const query = useQuery({ queryKey: ['user', user!.id, 'creation-draft', draftId], queryFn: ({ signal }) => request<CreationDraft>(`/v1/creation/drafts/${encodeURIComponent(draftId)}`, { signal }) })
   const draft = query.data
+  const refetchDraft = query.refetch
   useEffect(() => {
-    if (!draft || !handoff || handoff.opened || editing) return
-    // Latest fetched definition, never the failed request's expectedVersion.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setEditing({ definition: draft.definition, version: draft.version })
-    setTab('preview')
-    setManualIntent({ ...handoff, opened: true })
-  }, [draft, handoff, editing])
+    if (!handoff || handoff.opened || editing) return
+    let cancelled = false
+    void (async () => {
+      let result: Awaited<ReturnType<typeof refetchDraft>>
+      try { result = await refetchDraft() } catch { return }
+      if (cancelled) return
+      const current = getManualIntent()
+      const latest = result.data
+      if (!current || current.requestId !== handoff.requestId || current.opened || !latest || result.isError) return
+      setEditing({ definition: latest.definition, version: latest.version })
+      setTab('preview')
+      setManualIntent({ ...current, opened: true })
+    })()
+    return () => { cancelled = true }
+  }, [handoff, editing, refetchDraft])
   useEffect(() => {
     if (!handoff?.opened || !editing) return
     document.querySelector<HTMLElement>('#creation-preview-panel input')?.focus()

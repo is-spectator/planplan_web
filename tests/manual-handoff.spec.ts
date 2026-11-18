@@ -276,6 +276,42 @@ test('创作明确失败打开最新草稿编辑器，手机可见，不覆盖�
   if (info.project.name === 'chromium') await page.screenshot({ path: `${artifacts}/manual-handoff-creation-editor.png` })
 })
 
+test('创作转手动会重新读取草稿，不用打开前的旧缓存', async ({ page }) => {
+  const userId = randomUUID()
+  const draftId = randomUUID()
+  let name = '打开前的草稿'
+  let version = 4
+  let reads = 0
+  await page.route('**/v1/**', async (route) => {
+    const request = route.request()
+    const path = new URL(request.url()).pathname
+    const send = (data: unknown, status = 200) => route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(data) })
+    if (path === '/v1/auth/web/session') return send({ userId, csrfToken: 'fresh-draft' })
+    if (path === '/v1/me') return send({ id: userId, aiConsent: true, dataVersion: 1, today, timezone: 'Asia/Shanghai', signInMethod: 'email' })
+    if (path === `/v1/creation/drafts/${draftId}`) {
+      reads += 1
+      const definition = { ...water.definition, id: `private.${draftId}`, source: 'private' as const, requiredCapabilities: ['generic-record-v1', 'private-template-v1'], name }
+      return send({ id: draftId, version, name, definition, messages: [], changeSummary: [], canUndo: false, savedTemplate: null, sourcePlanId: null, sourcePlanVersion: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() })
+    }
+    return send({ error: { code: 'not_found', message: 'fixture' } }, 404)
+  })
+  await page.goto(`/create/${draftId}`)
+  await expect(page.getByRole('heading', { name: '打开前的草稿', exact: true })).toBeVisible()
+  const before = reads
+  name = '别人刚改过'
+  version = 9
+  await page.evaluate(async ({ userId, draftId }) => {
+    const entry = { userId, id: crypto.randomUUID(), kind: 'creation', path: '/v1/creation/requests', lookup: '/v1/creation/requests/x', body: { action: 'message', draftId, text: '旧请求里的说明', expectedVersion: 1, clientOpId: 'x' }, createdAt: Date.now() - 10_000, status: 'transient', message: '失败' }
+    const db = await new Promise<IDBDatabase>((resolve, reject) => { const opening = indexedDB.open('planplan-recovery', 1); opening.onsuccess = () => resolve(opening.result); opening.onerror = () => reject(opening.error) })
+    await new Promise<void>((resolve, reject) => { const tx = db.transaction('pending', 'readwrite'); tx.objectStore('pending').put(entry); tx.oncomplete = () => resolve(); tx.onerror = () => reject(tx.error) })
+    db.close()
+    new BroadcastChannel('planplan-recovery').postMessage('changed')
+  }, { userId, draftId })
+  await page.getByRole('button', { name: '取消重试，手动编辑', exact: true }).click()
+  await expect(page.getByLabel('模板名称', { exact: true })).toHaveValue('别人刚改过')
+  expect(reads).toBeGreaterThan(before)
+})
+
 test('真实本地 API：明确失败后手动保存只新增一条记录', async ({ page }) => {
   test.skip(!process.env.PLANPLAN_E2E_EMAIL || !process.env.PLANPLAN_E2E_PASSWORD, '需要隔离本地夹具账户')
   const marker = `手动交接${Date.now().toString().slice(-6)}`
