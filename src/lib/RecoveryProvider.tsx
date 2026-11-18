@@ -51,7 +51,10 @@ export function RecoveryProvider({ children }: { children: ReactNode }) {
   const [completed, setCompleted] = useState<Completion | null>(null)
   const [conflict, setConflict] = useState<RecoveryContextValue['conflict']>(null)
   const channel = useRef<BroadcastChannel | null>(null)
-  useEffect(() => { activeUser.current = user?.id }, [user?.id])
+  useEffect(() => {
+    activeUser.current = user?.id
+    return () => { activeUser.current = undefined }
+  }, [user?.id])
   useEffect(() => {
     const owner = user?.id
     return () => {
@@ -203,6 +206,7 @@ export function RecoveryProvider({ children }: { children: ReactNode }) {
       return await withSessionLock(async () => {
         if (activeUser.current !== id) return null
         const saved = await readPending(id)
+        if (activeUser.current !== id) return null
         if (!saved || saved.id !== expectedId || saved.userId !== id || !canHandOff(saved)) {
           setEntry(saved?.userId === id ? saved : null)
           return null
@@ -257,7 +261,8 @@ export function RecoveryFeedback({ requestId, global = false }: { requestId?: st
   const manualLabel = entry ? handoffLabel(entry) : null
   async function handoff(expectedId: string) {
     const cancelled = await beginManual(expectedId)
-    if (!cancelled || cancelled.userId !== user?.id) return
+    const intent = getManualIntent()
+    if (!cancelled || cancelled.userId !== user?.id || intent?.userId !== cancelled.userId || intent.requestId !== cancelled.id) return
     const path = handoffPath(cancelled)
     if (path) navigate(path)
   }

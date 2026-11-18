@@ -92,7 +92,7 @@ function DetailContent({ plan }: { plan: PlanView }) {
     next.delete('record')
     setSearch(next, { replace: true })
   }
-  function saved(result: OperationResult) { setSavedOperation(result); setAdding(false); if (manual?.opened) dismissManual(); const next = new URLSearchParams(search); next.delete('record'); next.delete('page'); setSearch(next, { replace: true }) }
+  function saved(result: OperationResult) { setSavedOperation(result); setAdding(false); if (manual) dismissManual(); const next = new URLSearchParams(search); next.delete('record'); next.delete('page'); setSearch(next, { replace: true }) }
   function closeSettings() {
     setSettings(false)
     const next = new URLSearchParams(search)
@@ -134,7 +134,7 @@ function DetailContent({ plan }: { plan: PlanView }) {
     {archiveConfirm && plan.status === 'active' && <section className="plan-notice"><h2>归档「{plan.name}」？</h2><p>归档后暂停新增记录，历史数据会保留，需要时可以恢复。学习计划的归档或恢复会影响本周达标评定。</p><div className="plan-form-actions"><button type="button" className="button primary" disabled={busy || pending} onClick={async () => { const result = await submit([{ type: 'archive_plan', planId: plan.id }]); if (result) setArchiveConfirm(false) }}>{busy ? '正在归档…' : '确认归档'}</button><button type="button" className="button plan-secondary" disabled={busy || pending} onClick={() => setArchiveConfirm(false)}>取消</button></div></section>}
     {manual && plan.status === 'archived' && <section className="plan-notice" role="status"><h2>这个计划已归档</h2><p>不能在这里新增记录，也不会改用其他计划。历史记录仍会保留。</p><Link className="text-link" to="/plans">返回计划</Link><OriginalMessage text={manual.text} /></section>}
     {manual && plan.status === 'active' && <OriginalMessage text={manual.text} />}
-    {adding && <section className="plan-form-panel"><h2>{ledger ? '记录一笔支出' : reading ? '记录一段阅读' : '记录一段学习'}</h2><RecordForm plan={plan} today={user!.today} reading={reading?.config} onSaved={saved} onCancel={() => { setAdding(false); if (manual?.opened) dismissManual() }} /></section>}
+    {adding && <section className="plan-form-panel"><h2>{ledger ? '记录一笔支出' : reading ? '记录一段阅读' : '记录一段学习'}</h2><RecordForm plan={plan} today={user!.today} reading={reading?.config} onSaved={saved} onCancel={() => { setAdding(false); if (manual) dismissManual() }} /></section>}
     {selectedRecord && <RecordInspector key={selectedRecord} recordId={selectedRecord} plan={plan} today={user!.today} reading={reading?.config} onSaved={saved} onClose={closeRecord} />}
     {detail.isPending && <p className="plan-loading" role="status">正在读取统计和记录…</p>}
     {detail.isError && <div className="plan-notice plan-form-error" role="alert"><p>{errorMessage(detail.error)}</p><button className="text-link" type="button" onClick={() => void detail.refetch()}>重新读取</button></div>}

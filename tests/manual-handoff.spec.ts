@@ -1,10 +1,12 @@
 import { expect, test, type Page } from '@playwright/test'
 import { mkdir } from 'node:fs/promises'
 import { randomUUID } from 'node:crypto'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import type { PlanView, TemplatePlanState } from '../src/lib/contracts'
 
 const today = '2026-11-18'
-const artifacts = '/opt/cursor/artifacts'
+const artifacts = process.env.PLANPLAN_E2E_SCREENSHOT_DIR ?? join(tmpdir(), 'planplan-manual-handoff')
 
 function plan(partial: Partial<PlanView> & Pick<PlanView, 'id' | 'kind' | 'name'>): PlanView {
   return { activity: null, status: 'active', startDate: today, hidden: [], order: [], lastActivityAt: new Date().toISOString(), ...partial }
@@ -40,8 +42,8 @@ async function pendingStatus(page: Page, userId: string) {
   }, userId)
 }
 
-async function install(page: Page, options: { plans: PlanView[]; mode?: 'transient' | 'processing' | 'drop' | 'ok'; water?: boolean; reading?: boolean }) {
-  const userId = randomUUID()
+async function install(page: Page, options: { plans: PlanView[]; mode?: 'transient' | 'processing' | 'drop' | 'ok'; water?: boolean; reading?: boolean; userId?: string }) {
+  let userId = options.userId ?? randomUUID()
   const posts: { clientMsgId: string; text: string; scopePlanId?: string | null }[] = []
   const operations: { clientOpId: string; actions: { type: string }[] }[] = []
   let mode = options.mode ?? 'transient'
@@ -90,7 +92,28 @@ async function install(page: Page, options: { plans: PlanView[]; mode?: 'transie
     }
     return send({ error: { code: 'not_found', message: 'fixture' } }, 404)
   })
-  return { userId, posts, operations, setMode: (next: typeof mode) => { mode = next }, setLookup: (next: typeof lookup) => { lookup = next } }
+  return { userId, posts, operations, setUser: (next: string) => { userId = next }, setMode: (next: typeof mode) => { mode = next }, setLookup: (next: typeof lookup) => { lookup = next } }
+}
+
+async function holdSessionLock(page: Page) {
+  await page.evaluate(() => new Promise<void>((acquired) => {
+    void navigator.locks.request('planplan-browser-session', () => new Promise<void>((release) => {
+      (window as typeof window & { releaseHandoffLock?: () => void }).releaseHandoffLock = release
+      acquired()
+    }))
+  }))
+}
+
+async function releaseSessionLock(page: Page) {
+  await page.evaluate(() => {
+    const state = window as typeof window & { releaseHandoffLock?: () => void }
+    state.releaseHandoffLock?.()
+    delete state.releaseHandoffLock
+  })
+}
+
+async function expectHandoffWaitingForLock(page: Page) {
+  await expect.poll(() => page.evaluate(async () => (await navigator.locks.query()).pending?.filter(lock => lock.name === 'planplan-browser-session').length ?? 0)).toBeGreaterThan(0)
 }
 
 test.beforeAll(async () => { await mkdir(artifacts, { recursive: true }) })
@@ -227,6 +250,172 @@ test('处理中、未知结果和存储失败不能转手动；明确失败后�
   expect(await pendingStatus(page, state.userId)).toMatchObject({ status: 'transient' })
 })
 
+test('已有未保存记录时转手动保留输入，取消表单后不再自动打开', async ({ page }) => {
+  const ledgerId = randomUUID()
+  const state = await install(page, { plans: [plan({ id: ledgerId, kind: 'ledger', name: '保留输入的计划' })] })
+  await page.goto(`/plans/${ledgerId}`)
+  await page.getByRole('button', { name: '记一笔', exact: true }).click()
+  await page.getByLabel('支出金额（元）', { exact: true }).fill('18.50')
+  await page.getByLabel('备注（可留空）', { exact: true }).fill('已经写好的备注')
+  await page.evaluate(async ({ userId, ledgerId }) => {
+    const id = crypto.randomUUID()
+    const entry = { userId, id, kind: 'chat', path: '/v1/chat', lookup: `/v1/chat/${id}`, body: { text: '之前失败的另一条消息', scopePlanId: ledgerId, clientMsgId: id }, createdAt: Date.now() - 10_000, status: 'transient', message: 'AI这次没有生成可用结果。' }
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const opening = indexedDB.open('planplan-recovery', 1)
+      opening.onsuccess = () => resolve(opening.result)
+      opening.onerror = () => reject(opening.error)
+    })
+    try {
+      await new Promise<void>((resolve, reject) => {
+        const tx = db.transaction('pending', 'readwrite')
+        tx.objectStore('pending').put(entry)
+        tx.oncomplete = () => resolve()
+        tx.onerror = () => reject(tx.error)
+      })
+    } finally { db.close() }
+    const channel = new BroadcastChannel('planplan-recovery')
+    channel.postMessage('changed')
+    channel.close()
+  }, { userId: state.userId, ledgerId })
+  await page.getByRole('button', { name: '取消重试，手动添加记录', exact: true }).click()
+  await expect(page.getByLabel('支出金额（元）', { exact: true })).toHaveValue('18.50')
+  await expect(page.getByRole('textbox', { name: '备注（可留空）', exact: true })).toHaveValue('已经写好的备注')
+  await page.locator('.plan-form-panel').getByRole('button', { name: '取消', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '记录一笔支出', exact: true })).toHaveCount(0)
+  await expect(page.locator('.original-message')).toHaveCount(0)
+  await page.getByRole('button', { name: '刷新', exact: true }).click()
+  await expect(page.getByRole('button', { name: '记一笔', exact: true })).toBeEnabled()
+  await expect(page.getByRole('heading', { name: '记录一笔支出', exact: true })).toHaveCount(0)
+  expect(state.posts).toHaveLength(0)
+  expect(state.operations).toHaveLength(0)
+  expect(await pendingStatus(page, state.userId)).toBeNull()
+})
+
+test('另一个标签在等待锁期间替换请求，旧手动按钮不会清除新任务或跳转', async ({ page, context }) => {
+  const ledgerId = randomUUID()
+  const plans = [plan({ id: ledgerId, kind: 'ledger', name: '并发计划' })]
+  const state = await install(page, { plans })
+  await page.goto(`/chat?plan=${ledgerId}`)
+  await page.getByRole('textbox', { name: '消息', exact: true }).fill('原失败消息')
+  await page.getByRole('button', { name: '发送消息', exact: true }).click()
+  await expect(page.getByRole('button', { name: '取消重试，手动添加记录', exact: true })).toBeVisible()
+
+  const other = await context.newPage()
+  await install(other, { plans, userId: state.userId })
+  await other.goto('/plans')
+  await expect(other.getByRole('button', { name: '取消重试，手动添加记录', exact: true })).toBeVisible()
+  await holdSessionLock(other)
+  try {
+    await page.getByRole('button', { name: '取消重试，手动添加记录', exact: true }).click()
+    await expectHandoffWaitingForLock(other)
+    const replacementId = randomUUID()
+    await other.evaluate(async ({ userId, replacementId }) => {
+      const db = await new Promise<IDBDatabase>((resolve, reject) => {
+        const opening = indexedDB.open('planplan-recovery', 1)
+        opening.onsuccess = () => resolve(opening.result)
+        opening.onerror = () => reject(opening.error)
+      })
+      try {
+        await new Promise<void>((resolve, reject) => {
+          const tx = db.transaction('pending', 'readwrite')
+          const store = tx.objectStore('pending')
+          const original = store.get(userId)
+          original.onsuccess = () => store.put({ ...original.result, id: replacementId, status: 'unknown', body: { ...original.result.body, clientMsgId: replacementId, text: '另一标签的新请求' } })
+          tx.oncomplete = () => resolve()
+          tx.onerror = () => reject(tx.error)
+        })
+      } finally { db.close() }
+    }, { userId: state.userId, replacementId })
+    await releaseSessionLock(other)
+    await expect(page.getByRole('button', { name: '核对结果', exact: true })).toBeVisible()
+    await expect(page.getByRole('button', { name: /取消重试/ })).toHaveCount(0)
+    await expect(page).toHaveURL(new RegExp(`/chat\\?plan=${ledgerId}$`))
+    expect(await pendingStatus(page, state.userId)).toMatchObject({ id: replacementId, status: 'unknown' })
+    expect(state.posts).toHaveLength(1)
+    expect(state.operations).toHaveLength(0)
+  } finally {
+    await releaseSessionLock(other)
+    await other.close()
+  }
+})
+
+test('转手动等待锁期间切换账号，不清除旧账号请求也不发生迟到跳转', async ({ page, context }) => {
+  const ledgerId = randomUUID()
+  const plans = [plan({ id: ledgerId, kind: 'ledger', name: '旧账号的计划' })]
+  const state = await install(page, { plans })
+  await page.goto(`/chat?plan=${ledgerId}`)
+  await page.getByRole('textbox', { name: '消息', exact: true }).fill('旧账号的私人原文')
+  await page.getByRole('button', { name: '发送消息', exact: true }).click()
+  await expect(page.getByRole('button', { name: '取消重试，手动添加记录', exact: true })).toBeVisible()
+  const failedId = state.posts[0]!.clientMsgId
+
+  const other = await context.newPage()
+  await install(other, { plans, userId: state.userId })
+  await other.goto('/plans')
+  await expect(other.getByRole('button', { name: '取消重试，手动添加记录', exact: true })).toBeVisible()
+  await holdSessionLock(other)
+  try {
+    await page.getByRole('button', { name: '取消重试，手动添加记录', exact: true }).click()
+    await expectHandoffWaitingForLock(other)
+    const newUserId = randomUUID()
+    state.setUser(newUserId)
+    plans.splice(0, plans.length)
+    const refreshed = page.waitForResponse(response => new URL(response.url()).pathname === '/v1/me' && response.request().headers()['x-planplan-expected-user'] === newUserId)
+    await page.evaluate(() => window.dispatchEvent(new Event('focus')))
+    await refreshed
+    await expect(page.locator('.recovery-feedback.needs-attention')).toHaveCount(0)
+    expect(await pendingStatus(page, state.userId)).toMatchObject({ id: failedId, status: 'transient' })
+
+    await releaseSessionLock(other)
+    await expect.poll(() => other.evaluate(async () => (await navigator.locks.query()).held?.filter(lock => lock.name === 'planplan-browser-session').length ?? 0)).toBe(0)
+    await expect(page).toHaveURL(new RegExp(`/chat\\?plan=${ledgerId}$`))
+    expect(await pendingStatus(page, state.userId)).toMatchObject({ id: failedId, status: 'transient' })
+    expect(await pendingStatus(page, newUserId)).toBeNull()
+    await expect(page.locator('.original-message')).toHaveCount(0)
+    expect(state.posts).toHaveLength(1)
+    expect(state.operations).toHaveLength(0)
+  } finally {
+    await releaseSessionLock(other)
+    await other.close()
+  }
+})
+
+test('空白创作明确失败后在手机打开空白编辑器，不自动保存或重新调用模型', async ({ page }) => {
+  const userId = randomUUID(), draftId = randomUUID()
+  const posts: { action: string; clientOpId: string }[] = []
+  let reads = 0
+  const draft = { id: draftId, version: 1, name: '新的创作', definition: null, messages: [], changeSummary: [], canUndo: false, savedTemplate: null, sourcePlanId: null, sourcePlanVersion: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() }
+  await page.route('**/v1/**', async route => {
+    const request = route.request(), path = new URL(request.url()).pathname
+    const send = (data: unknown, status = 200) => route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(data) })
+    if (path === '/v1/auth/web/session') return send({ userId, csrfToken: 'blank-draft-handoff' })
+    if (path === '/v1/me') return send({ id: userId, aiConsent: true, dataVersion: 1, today, timezone: 'Asia/Shanghai', signInMethod: 'email' })
+    if (path === `/v1/creation/drafts/${draftId}`) { reads += 1; return send(draft) }
+    if (path === '/v1/creation/requests' && request.method() === 'POST') {
+      const body = request.postDataJSON()
+      posts.push(body)
+      return send({ clientOpId: body.clientOpId, kind: 'message', transient: true, message: 'AI这次没有生成可用结果。原草稿已保留。', draft })
+    }
+    return send({ error: { code: 'not_found', message: 'fixture' } }, 404)
+  })
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto(`/create/${draftId}`)
+  await page.getByRole('textbox', { name: '创作消息', exact: true }).fill('创建一个有阅读分钟的模板')
+  await page.getByRole('button', { name: '发送创作消息', exact: true }).click()
+  await expect(page.getByRole('button', { name: '取消重试，手动编辑', exact: true })).toBeVisible()
+  const before = reads
+  await page.getByRole('button', { name: '取消重试，手动编辑', exact: true }).click()
+  await expect(page.getByRole('tab', { name: '预览', exact: true })).toHaveAttribute('aria-selected', 'true')
+  await expect(page.getByLabel('模板名称', { exact: true })).toBeVisible()
+  await expect(page.getByLabel('模板名称', { exact: true })).toHaveValue('新模板')
+  await page.getByText('原消息', { exact: true }).click()
+  await expect(page.locator('.original-message')).toContainText('创建一个有阅读分钟的模板')
+  expect(reads).toBeGreaterThan(before)
+  expect(posts).toHaveLength(1)
+  expect(posts[0]!.action).toBe('message')
+  expect(await pendingStatus(page, userId)).toBeNull()
+})
+
 test('创作明确失败打开最新草稿编辑器，手机可见，不覆盖未保存编辑', async ({ page }, info) => {
   const userId = randomUUID()
   const draftId = randomUUID()
@@ -266,14 +455,19 @@ test('创作明确失败打开最新草稿编辑器，手机可见，不覆盖�
   await expect(page.getByRole('button', { name: '取消重试，手动编辑', exact: true })).toBeVisible()
   await page.getByRole('button', { name: '取消重试，手动编辑', exact: true }).click()
   await expect(page.getByLabel('模板名称', { exact: true })).toHaveValue('未保存的标题')
-  expect(posts).toEqual([])
-  await page.getByRole('button', { name: '取消编辑', exact: true }).click()
-  await expect(page.getByRole('tab', { name: '预览', exact: true })).toHaveAttribute('aria-selected', 'true')
-  await expect(page.getByLabel('模板名称', { exact: true })).toHaveValue('最新草稿名')
   await page.getByText('原消息', { exact: true }).click()
   await expect(page.locator('.original-message')).toContainText('把饮水量改成备注')
   expect(posts).toEqual([])
   if (info.project.name === 'chromium') await page.screenshot({ path: `${artifacts}/manual-handoff-creation-editor.png` })
+  await page.getByRole('button', { name: '取消编辑', exact: true }).click()
+  await expect(page.getByRole('tab', { name: '预览', exact: true })).toHaveAttribute('aria-selected', 'true')
+  await expect(page.getByLabel('模板名称', { exact: true })).toHaveCount(0)
+  await expect(page.locator('.original-message')).toHaveCount(0)
+  await page.getByRole('tab', { name: '对话', exact: true }).click()
+  await page.getByRole('tab', { name: '预览', exact: true }).click()
+  await expect(page.getByRole('button', { name: '手动编辑', exact: true })).toBeEnabled()
+  await expect(page.getByLabel('模板名称', { exact: true })).toHaveCount(0)
+  expect(posts).toEqual([])
 })
 
 test('创作转手动会重新读取草稿，不用打开前的旧缓存', async ({ page }) => {
@@ -329,6 +523,16 @@ test('真实本地 API：明确失败后手动保存只新增一条记录', asyn
   await page.getByLabel('密码', { exact: true }).fill(process.env.PLANPLAN_E2E_PASSWORD!)
   await page.getByRole('button', { name: '登录', exact: true }).click()
   await expect(page).toHaveURL('/plans')
+  // A fresh isolated fixture starts with AI consent disabled. The failed chat
+  // below is intercepted, so enabling the UI does not contact a real model.
+  await page.goto('/me')
+  await expect(page.getByRole('heading', { name: 'AI 对话', exact: true })).toBeVisible()
+  const enabledForTest = await page.getByRole('button', { name: '同意并开启 AI 对话', exact: true }).isVisible()
+  if (enabledForTest) await page.getByRole('button', { name: '同意并开启 AI 对话', exact: true }).click()
+  await expect(page.getByRole('button', { name: '关闭 AI 对话', exact: true })).toBeVisible()
+  await page.goto('/plans')
+  await expect(page.getByRole('heading', { name: '计划', exact: true })).toBeVisible()
+  await expect(page.getByText('正在读取计划…', { exact: true })).toHaveCount(0)
   if (await page.locator('.plan-list-item.ledger').count() === 0) {
     await page.getByRole('button', { name: '新建计划', exact: true }).first().click()
     await page.getByRole('button', { name: '创建计划', exact: true }).click()
@@ -356,4 +560,9 @@ test('真实本地 API：明确失败后手动保存只新增一条记录', asyn
   await page.getByRole('button', { name: '删除记录', exact: true }).click()
   await page.getByRole('button', { name: '确认删除', exact: true }).click()
   await expect(page.getByText(marker, { exact: true })).toHaveCount(0)
+  if (enabledForTest) {
+    await page.goto('/me')
+    await page.getByRole('button', { name: '关闭 AI 对话', exact: true }).click()
+    await expect(page.getByRole('button', { name: '同意并开启 AI 对话', exact: true })).toBeVisible()
+  }
 })
