@@ -15,6 +15,7 @@
 .plan-tabs button[aria-pressed="true"], .plan-kind-options button[aria-pressed="true"] { background: var(--card); color: var(--text-primary); box-shadow: 0 1px 4px #00000008; }
 .plan-list { display: grid; gap: 14px; }
 .plan-list-item { display: flex; align-items: center; gap: 18px; padding: 24px; background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-card); }
+button.plan-list-item { width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer; }
 .plan-list-item:hover { border-color: var(--text-secondary); }
 .plan-list-copy { flex: 1; min-width: 0; }
 .plan-list-copy h2 { font-size: 18px; overflow-wrap: anywhere; }

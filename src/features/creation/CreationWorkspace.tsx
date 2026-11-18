@@ -4,6 +4,8 @@ import { ArrowLeft, ArrowRight, ArrowUp, FilePenLine, MessageCircle, Pencil, Rot
 import { Link, useNavigate } from 'react-router-dom'
 import { useSession } from '../../auth/SessionProvider'
 import { PageState } from '../../components/PageState'
+import { OriginalMessage } from '../../components/OriginalMessage'
+import { dismissManual, setManualIntent, useManualIntent } from '../../lib/manual-handoff'
 import { useRecovery } from '../../lib/RecoveryProvider'
 import type { OperationResult, TemplateDefinition } from '../../lib/contracts'
 import { useOperation } from '../../lib/useOperation'
@@ -28,6 +30,8 @@ export function CreationWorkspace({ draftId }: { draftId: string }) {
   const [inputError, setInputError] = useState('')
   const [tab, setTab] = useState<'chat' | 'preview'>('chat')
   const [editing, setEditing] = useState<{ definition: TemplateDefinition | null; version: number } | null>(null)
+  const manual = useManualIntent()
+  const handoff = manual?.kind === 'creation' && manual.draftId === draftId ? manual : null
   const [apply, setApply] = useState(false)
   const handled = useRef<string | null>(completed?.clientOpId ?? null)
   const operationOnArrival = useRef(recovery.completed?.entry.id)
@@ -37,6 +41,18 @@ export function CreationWorkspace({ draftId }: { draftId: string }) {
   const end = useRef<HTMLDivElement>(null)
   const query = useQuery({ queryKey: ['user', user!.id, 'creation-draft', draftId], queryFn: ({ signal }) => request<CreationDraft>(`/v1/creation/drafts/${encodeURIComponent(draftId)}`, { signal }) })
   const draft = query.data
+  useEffect(() => {
+    if (!draft || !handoff || handoff.opened || editing) return
+    // Latest fetched definition, never the failed request's expectedVersion.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setEditing({ definition: draft.definition, version: draft.version })
+    setTab('preview')
+    setManualIntent({ ...handoff, opened: true })
+  }, [draft, handoff, editing])
+  useEffect(() => {
+    if (!handoff?.opened || !editing) return
+    document.querySelector<HTMLElement>('#creation-preview-panel input')?.focus()
+  }, [handoff?.opened, editing])
   const definition = draft?.definition
   const locked = busy || pending
   const enterPlan = (result: OperationResult) => { if (result.templatePlan) navigate(`/plans/${result.templatePlan.planId}${result.templatePlan.config.setupStatus === 'pending' ? '?setup=1' : ''}`) }
@@ -91,7 +107,7 @@ export function CreationWorkspace({ draftId }: { draftId: string }) {
   return <>
     <Link className="text-link back-link" to="/create"><ArrowLeft size={17} />返回我的作品</Link>
     {query.isPending && <p className="plan-loading" role="status">正在读取创作草稿…</p>}
-    {query.isError && <PageState icon={<FilePenLine size={28} />} title="暂时无法打开草稿" tone="error" action={<button className="button primary" onClick={() => void query.refetch()}>重新读取</button>}><p>{errorMessage(query.error)}</p></PageState>}
+    {query.isError && <PageState icon={<FilePenLine size={28} />} title="暂时无法打开草稿" tone="error" action={<button className="button primary" onClick={() => void query.refetch()}>重新读取</button>}><p>{errorMessage(query.error)}</p>{handoff && <><p>不会新建另一份草稿。</p><Link className="text-link" to="/create">返回我的作品</Link><OriginalMessage text={handoff.text} /></>}</PageState>}
     {draft && <>
       <header className="page-heading creation-workbench-heading"><div><h1>{definition?.name || '新的创作'}</h1><p>在这里设计模板，选用之后再开始记录。</p></div><div className="creation-header-actions"><button className="button plan-secondary" type="button" disabled={locked || !!editing || !draft.canUndo} onClick={async () => { await submit({ action: 'undo', draftId, expectedVersion: draft.version }) }}><RotateCcw size={16} />撤回修改</button>{draft.savedTemplate && !editing ? <button className="button primary" type="button" disabled={locked} onClick={() => void adoptSaved()}>使用模板<ArrowRight size={16} /></button> : <button className="button primary" type="button" disabled={locked || !!editing || !definition} onClick={async () => { await submit({ action: 'save', draftId, expectedVersion: draft.version }) }}>保存私人模板</button>}</div></header>
       {draft.sourcePlanId && <p className="creation-source-note">正在为一个已有计划设计私人模板。保存模板后，还需单独确认应用，原计划才会更新。</p>}
@@ -104,7 +120,8 @@ export function CreationWorkspace({ draftId }: { draftId: string }) {
           <form className="creation-composer" onSubmit={send}><label htmlFor="creation-message" className="sr-only">创作消息</label><textarea id="creation-message" ref={composer} rows={3} maxLength={2000} value={text} onChange={(event) => { setText(event.target.value); setInputError('') }} onPaste={(event) => { const area = event.currentTarget; if (text.length - (area.selectionEnd - area.selectionStart) + event.clipboardData.getData('text').length > 2000) { event.preventDefault(); setInputError('粘贴内容超过2000字，请分成两次发送，当前内容未改动。') } }} onCompositionStart={() => { composing.current = true }} onCompositionEnd={() => { composing.current = false }} onKeyDown={onKey} placeholder="例如：再加一个记录心情的选项" />{inputError && <p role="alert" className="plan-form-error">{inputError}</p>}<div><span>{text.length > 1700 ? `${text.length}/2000` : 'Enter 发送 · Shift + Enter 换行'}</span><button type="submit" className="button primary" aria-label="发送创作消息" disabled={locked || !!editing || !user!.aiConsent || !text.trim()}>{busy ? '处理中…' : '发送'}<ArrowUp size={17} /></button></div></form>
         </section>
         <section className="creation-preview-pane" id="creation-preview-panel" aria-label="模板预览"><div className="creation-panel-heading"><h2>模板预览</h2><button type="button" className="text-link" disabled={locked || !!editing} onClick={() => { setEditing({ definition: draft.definition, version: draft.version }); setTab('preview') }}><Pencil size={15} />手动编辑</button></div>
-          {editing ? <DefinitionEditor initial={editing.definition} today={user!.today} locked={locked} onCancel={() => setEditing(null)} onSave={async (value) => { await submit({ action: 'update', draftId, expectedVersion: editing.version, definition: value }) }} /> : definition ? <>
+          {handoff && <OriginalMessage text={handoff.text} />}
+          {editing ? <DefinitionEditor initial={editing.definition} today={user!.today} locked={locked} onCancel={() => { setEditing(null); if (handoff?.opened) dismissManual() }} onSave={async (value) => { const result = await submit({ action: 'update', draftId, expectedVersion: editing.version, definition: value }); if (result && handoff) dismissManual() }} /> : definition ? <>
             <section className="creation-description"><h3>功能简介</h3><p>{definition.description}</p><dl><div><dt>每次记录</dt><dd>{definition.recordFields.map((field) => field.label).join('、')}</dd></div><div><dt>统计结果</dt><dd>{definition.metrics.map((metric) => `${metric.label}（每${periodLabel[metric.period]}）`).join('、') || '查看记录列表'}</dd></div></dl></section>
             {draft.changeSummary.length > 0 && <details className="creation-changes"><summary>查看这次修改</summary><ul>{draft.changeSummary.map((change, index) => <li key={index}>{change}</li>)}</ul></details>}
             <section className="creation-style" aria-label="样式预览"><h3>样式预览</h3><TemplateStylePreview definition={definition} /></section>
