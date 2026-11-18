@@ -242,12 +242,12 @@ for (const kind of ['ledger', 'study', 'generic'] as const) test(`${kind}轮询�
   const value = page.getByLabel(kind === 'ledger' ? '月预算（元，可留空）' : kind === 'study' ? '每日目标分钟（可留空）' : '每周饮水目标（可留空）', { exact: true })
   await value.fill(kind === 'generic' ? '5000' : '30')
   f.state.today = after
-  await page.clock.setSystemTime(new Date('2027-01-31T16:00:01Z'))
   const save = page.getByRole('button', { name: kind === 'ledger' ? '保存预算' : '保存设置', exact: true })
   await save.click()
   await expect.poll(() => f.bodies.length).toBe(1)
   expect(f.bodies[0]!.actions[0]).toHaveProperty('reviewedOn', before)
   expect(f.state.writes).toBe(0)
+  await page.clock.setSystemTime(new Date('2027-01-31T16:00:01Z'))
   await expect(value).toHaveValue(kind === 'generic' ? '5000' : '30')
   const review = page.getByRole('checkbox', { name: /已核对新的生效周期/ })
   await expect(review).toBeVisible(); await expect(save).toBeDisabled()
