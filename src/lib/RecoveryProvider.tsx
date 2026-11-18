@@ -1,7 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 import { useSession } from '../auth/SessionProvider'
 import { ApiError, withSessionLock } from './api'
+import { canHandOff, getManualIntent, handoffLabel, handoffPath, intentFromPending, setManualIntent } from './manual-handoff'
 import { readPending, removePending, savePending, type PendingRequest } from './recovery-store'
 
 interface Completion { entry: PendingRequest; result: unknown }
@@ -16,6 +18,7 @@ interface RecoveryContextValue {
   submit: <T>(entry: PendingRequest) => Promise<T | null>
   reconcile: (retry?: boolean, confirm?: boolean) => Promise<void>
   cancelConfirmation: () => Promise<void>
+  beginManual: (expectedId: string) => Promise<PendingRequest | null>
 }
 const RecoveryContext = createContext<RecoveryContextValue | null>(null)
 
@@ -48,7 +51,17 @@ export function RecoveryProvider({ children }: { children: ReactNode }) {
   const [completed, setCompleted] = useState<Completion | null>(null)
   const [conflict, setConflict] = useState<RecoveryContextValue['conflict']>(null)
   const channel = useRef<BroadcastChannel | null>(null)
-  useEffect(() => { activeUser.current = user?.id }, [user?.id])
+  useEffect(() => {
+    activeUser.current = user?.id
+    return () => { activeUser.current = undefined }
+  }, [user?.id])
+  useEffect(() => {
+    const owner = user?.id
+    return () => {
+      const current = getManualIntent()
+      if (current && current.userId === owner) setManualIntent(null)
+    }
+  }, [user?.id])
 
   const sync = useCallback(async () => {
     const id = user?.id
@@ -83,7 +96,18 @@ export function RecoveryProvider({ children }: { children: ReactNode }) {
     await refresh()
   }
 
+  async function holdUnknown(pending: PendingRequest) {
+    if (pending.status !== 'transient' || activeUser.current !== pending.userId) return pending
+    const held: PendingRequest = { ...pending, status: 'unknown', message: '还不能确定是否已保存，请先核对结果。' }
+    await savePending(held)
+    setEntry(held)
+    channel.current?.postMessage('changed')
+    return held
+  }
+
   async function post<T>(item: PendingRequest): Promise<T | null> {
+    // A retry must leave a non-manual state before the request leaves the browser.
+    if (item.status === 'transient') item = await holdUnknown(item)
     try {
       const result = await request<T>(item.path, { method: 'POST', body: item.body, headers: item.confirmationId ? { 'X-PlanPlan-Confirmation': item.confirmationId } : undefined })
       if (!validResult(result, item.kind)) throw new ApiError('invalid_response', '回复无法识别，请先核对保存结果。')
@@ -157,10 +181,13 @@ export function RecoveryProvider({ children }: { children: ReactNode }) {
         try {
           const response = await request<{ status: string; result?: unknown }>(pending.lookup)
           if (response.status === 'succeeded' && validResult(response.result, pending.kind)) { await finish(pending, response.result); return }
-          if (response.status === 'processing') { setMessage('仍在处理中，请稍后再核对。'); return }
+          if (response.status === 'processing') { await holdUnknown(pending); setMessage('仍在处理中，请稍后再核对。'); return }
           missing = response.status === 'not_found'
           if (!missing) throw new ApiError('invalid_response', '暂时无法核对回复，请稍后再试。')
-        } catch (reason) { if (reason instanceof ApiError && reason.status === 404) missing = true; else throw reason }
+        } catch (reason) {
+          if (reason instanceof ApiError && reason.status === 404) missing = true
+          else { await holdUnknown(pending); throw reason }
+        }
         if (missing && retry && (pending.status !== 'confirmation' || confirm)) {
           if (Date.now() - pending.createdAt > 29 * 86400_000) { setMessage('这条记录已超过重试期限，请核对计划中的历史记录。'); return }
           if (Date.now() - pending.createdAt < 3000) { setMessage('请稍等片刻，再核对一次。'); return }
@@ -169,6 +196,34 @@ export function RecoveryProvider({ children }: { children: ReactNode }) {
       })
     } catch (reason) { if (id === activeUser.current) setMessage(reason instanceof Error ? reason.message : '暂时无法核对，请稍后重试。') }
     finally { setBusy(false) }
+  }
+
+  async function beginManual(expectedId: string): Promise<PendingRequest | null> {
+    const id = user?.id
+    if (!id || busy) return null
+    setBusy(true)
+    try {
+      return await withSessionLock(async () => {
+        if (activeUser.current !== id) return null
+        const saved = await readPending(id)
+        if (activeUser.current !== id) return null
+        if (!saved || saved.id !== expectedId || saved.userId !== id || !canHandOff(saved)) {
+          setEntry(saved?.userId === id ? saved : null)
+          return null
+        }
+        await removePending(id)
+        if (activeUser.current !== id) return null
+        setManualIntent(intentFromPending(saved))
+        setEntry(null)
+        setMessageId(saved.id)
+        setMessage('')
+        channel.current?.postMessage('changed')
+        return saved
+      })
+    } catch (reason) {
+      if (id === activeUser.current) setMessage(reason instanceof Error ? reason.message : '暂时无法转入手动填写。')
+      return null
+    } finally { setBusy(false) }
   }
 
   async function cancelConfirmation() {
@@ -185,7 +240,7 @@ export function RecoveryProvider({ children }: { children: ReactNode }) {
     })
   }
 
-  return <RecoveryContext.Provider value={{ entry: entry?.userId === user?.id ? entry : null, completed: completed?.entry.userId === user?.id ? completed : null, conflict: conflict?.entry.userId === user?.id ? conflict : null, clearConflict: () => setConflict(null), busy, message, messageId, submit, reconcile, cancelConfirmation }}>{children}</RecoveryContext.Provider>
+  return <RecoveryContext.Provider value={{ entry: entry?.userId === user?.id ? entry : null, completed: completed?.entry.userId === user?.id ? completed : null, conflict: conflict?.entry.userId === user?.id ? conflict : null, clearConflict: () => setConflict(null), busy, message, messageId, submit, reconcile, cancelConfirmation, beginManual }}>{children}</RecoveryContext.Provider>
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -196,14 +251,24 @@ export function useRecovery() {
 }
 
 export function RecoveryFeedback({ requestId, global = false }: { requestId?: string | null; global?: boolean }) {
-  const { entry, busy, message, messageId, reconcile, cancelConfirmation } = useRecovery()
+  const { user } = useSession()
+  const navigate = useNavigate()
+  const { entry, busy, message, messageId, reconcile, cancelConfirmation, beginManual } = useRecovery()
   if (global && !entry) return null
   if (!global && entry) return null
   const showMessage = global || (!!requestId && requestId === messageId)
   if (!entry && (!message || !showMessage)) return null
+  const manualLabel = entry ? handoffLabel(entry) : null
+  async function handoff(expectedId: string) {
+    const cancelled = await beginManual(expectedId)
+    const intent = getManualIntent()
+    if (!cancelled || cancelled.userId !== user?.id || intent?.userId !== cancelled.userId || intent.requestId !== cancelled.id) return
+    const path = handoffPath(cancelled)
+    if (path) navigate(path)
+  }
   return <div className={`recovery-feedback${entry ? ' needs-attention' : ''}`} role="status">
     {entry && <><p>{busy ? '正在处理，请稍候…' : entry.message ?? '还在处理中，请稍候。'}</p><p className="field-hint">待核对内容暂存在此浏览器，确认后自动清除。</p>
-      {!busy && <div className="action-row"><button type="button" className="button secondary" onClick={() => void reconcile()}>核对结果</button><button type="button" className="button primary" onClick={() => void reconcile(true, entry.status === 'confirmation')}>{entry.status === 'confirmation' ? '确认又发生了一次' : entry.kind === 'chat' || entry.kind === 'creation' && entry.body.action === 'message' ? '重试原消息' : entry.kind === 'creation' ? '继续原操作' : '继续提交原记录'}</button>{(entry.status === 'confirmation' || entry.status === 'transient') && <button type="button" className="button secondary" onClick={() => void cancelConfirmation()}>{entry.status === 'transient' ? entry.kind === 'creation' ? '暂不重试，手动编辑' : '暂不重试，继续手动记录' : '取消本次提交'}</button>}</div>}</>}
+      {!busy && <div className="action-row"><button type="button" className="button secondary" onClick={() => void reconcile()}>核对结果</button><button type="button" className="button primary" onClick={() => void reconcile(true, entry.status === 'confirmation')}>{entry.status === 'confirmation' ? '确认又发生了一次' : entry.kind === 'chat' || entry.kind === 'creation' && entry.body.action === 'message' ? '重试原消息' : entry.kind === 'creation' ? '继续原操作' : '继续提交原记录'}</button>{manualLabel ? <button type="button" className="button secondary" onClick={() => void handoff(entry.id)}>{manualLabel}</button> : (entry.status === 'confirmation' || entry.status === 'transient') && <button type="button" className="button secondary" onClick={() => void cancelConfirmation()}>{entry.status === 'transient' ? entry.kind === 'creation' ? '暂不重试，手动编辑' : '暂不重试，继续手动记录' : '取消本次提交'}</button>}</div>}</>}
     {showMessage && message && <p>{message}</p>}
   </div>
 }

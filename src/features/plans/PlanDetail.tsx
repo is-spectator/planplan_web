@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowLeft, ArrowRight, BookOpen, Plus, RefreshCw } from 'lucide-react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { OriginalMessage } from '../../components/OriginalMessage'
+import { dismissManual, useManualIntent, useManualRecordOpen } from '../../lib/manual-handoff'
 import { useSession } from '../../auth/SessionProvider'
 import { useOperation } from '../../lib/useOperation'
 import { PageState } from '../../components/PageState'
@@ -20,6 +22,7 @@ import { useHistoryRestart, useRecordPageBounds, useRecordPagination } from './u
 
 export function PlanDetail({ planId }: { planId: string }) {
   const { user, request } = useSession()
+  const manual = useManualIntent()
   const [search] = useSearchParams()
   const plans = useQuery({
     queryKey: ['user', user!.id, 'plans', 'all'],
@@ -35,7 +38,7 @@ export function PlanDetail({ planId }: { planId: string }) {
   return <div className="standard-page plans-page">
     <Link className="text-link back-link" to="/plans"><ArrowLeft size={17} aria-hidden="true" />返回计划</Link>
     {plans.isError && plan && <p className="plan-notice" role="alert">计划状态暂未更新，当前显示上次读取的内容。<button type="button" className="text-link" onClick={() => void plans.refetch()}>重试</button></p>}
-    {plan ? plan.kind === 'generic' ? <GenericPlanDetail key={`${plan.id}:${search.get('date') || 'current'}`} plan={plan} /> : <DetailContent key={plan.id} plan={plan} /> : plans.isPending ? <p className="plan-loading" role="status">正在读取计划…</p> : plans.isError ? <PageState icon={<BookOpen size={28} />} title="暂时无法读取计划" tone="error" action={<button className="button primary" type="button" onClick={() => void plans.refetch()}>重新读取</button>}><p>{errorMessage(plans.error)}</p></PageState> : <PageState icon={<BookOpen size={28} />} title="没有找到这个计划"><p>请返回计划列表，重新选择。</p></PageState>}
+    {plan ? plan.kind === 'generic' ? <GenericPlanDetail key={`${plan.id}:${search.get('date') || 'current'}`} plan={plan} /> : <DetailContent key={plan.id} plan={plan} /> : plans.isPending ? <p className="plan-loading" role="status">正在读取计划…</p> : plans.isError ? <PageState icon={<BookOpen size={28} />} title="暂时无法读取计划" tone="error" action={<button className="button primary" type="button" onClick={() => void plans.refetch()}>重新读取</button>}><p>{errorMessage(plans.error)}</p>{manual?.kind === 'chat' && manual.planId === planId && <><p>不会改用其他计划。</p><OriginalMessage text={manual.text} /></>}</PageState> : <PageState icon={<BookOpen size={28} />} title="没有找到这个计划"><p>请返回计划列表，重新选择。不会改用其他计划，也不会新建。</p>{manual?.kind === 'chat' && manual.planId === planId && <OriginalMessage text={manual.text} />}</PageState>}
   </div>
 }
 
@@ -61,6 +64,8 @@ function DetailContent({ plan }: { plan: PlanView }) {
   const period = search.get(ledger ? 'month' : 'week') ?? ''
   const { offset, setOffset } = useRecordPagination(search, setSearch, user!.dataVersion, ledger ? user!.today.slice(0, 7) : periodRange(user!.today, 'week').from, !period)
   const selectedRecord = search.get('record')
+  const openManualForm = useCallback(() => setAdding(true), [])
+  const manual = useManualRecordOpen(plan.id, plan.status, adding || settings || Boolean(selectedRecord) || (!ledger && (template.isPending || template.isError)), openManualForm)
   const detail = useQuery({
     queryKey: ['user', user!.id, 'plan', plan.id, plan.kind, period, offset, user!.today, user!.dataVersion],
     queryFn: ({ signal }) => {
@@ -87,7 +92,7 @@ function DetailContent({ plan }: { plan: PlanView }) {
     next.delete('record')
     setSearch(next, { replace: true })
   }
-  function saved(result: OperationResult) { setSavedOperation(result); setAdding(false); const next = new URLSearchParams(search); next.delete('record'); next.delete('page'); setSearch(next, { replace: true }) }
+  function saved(result: OperationResult) { setSavedOperation(result); setAdding(false); if (manual) dismissManual(); const next = new URLSearchParams(search); next.delete('record'); next.delete('page'); setSearch(next, { replace: true }) }
   function closeSettings() {
     setSettings(false)
     const next = new URLSearchParams(search)
@@ -127,7 +132,9 @@ function DetailContent({ plan }: { plan: PlanView }) {
       </> : <button type="button" className="button primary" disabled={busy || pending} onClick={async () => { setArchiveConfirm(false); await submit([{ type: 'restore_plan', planId: plan.id }]) }}>{busy ? '正在恢复…' : '恢复计划'}</button>}</div>
     </div>
     {archiveConfirm && plan.status === 'active' && <section className="plan-notice"><h2>归档「{plan.name}」？</h2><p>归档后暂停新增记录，历史数据会保留，需要时可以恢复。学习计划的归档或恢复会影响本周达标评定。</p><div className="plan-form-actions"><button type="button" className="button primary" disabled={busy || pending} onClick={async () => { const result = await submit([{ type: 'archive_plan', planId: plan.id }]); if (result) setArchiveConfirm(false) }}>{busy ? '正在归档…' : '确认归档'}</button><button type="button" className="button plan-secondary" disabled={busy || pending} onClick={() => setArchiveConfirm(false)}>取消</button></div></section>}
-    {adding && <section className="plan-form-panel"><h2>{ledger ? '记录一笔支出' : reading ? '记录一段阅读' : '记录一段学习'}</h2><RecordForm plan={plan} today={user!.today} reading={reading?.config} onSaved={saved} onCancel={() => setAdding(false)} /></section>}
+    {manual && plan.status === 'archived' && <section className="plan-notice" role="status"><h2>这个计划已归档</h2><p>不能在这里新增记录，也不会改用其他计划。历史记录仍会保留。</p><Link className="text-link" to="/plans">返回计划</Link><OriginalMessage text={manual.text} /></section>}
+    {manual && plan.status === 'active' && <OriginalMessage text={manual.text} />}
+    {adding && <section className="plan-form-panel"><h2>{ledger ? '记录一笔支出' : reading ? '记录一段阅读' : '记录一段学习'}</h2><RecordForm plan={plan} today={user!.today} reading={reading?.config} onSaved={saved} onCancel={() => { setAdding(false); if (manual) dismissManual() }} /></section>}
     {selectedRecord && <RecordInspector key={selectedRecord} recordId={selectedRecord} plan={plan} today={user!.today} reading={reading?.config} onSaved={saved} onClose={closeRecord} />}
     {detail.isPending && <p className="plan-loading" role="status">正在读取统计和记录…</p>}
     {detail.isError && <div className="plan-notice plan-form-error" role="alert"><p>{errorMessage(detail.error)}</p><button className="text-link" type="button" onClick={() => void detail.refetch()}>重新读取</button></div>}
