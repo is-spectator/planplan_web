@@ -84,6 +84,8 @@
 
 这是预计范围，避免为了逐项修改而碰无关文件。无需改后端响应、数据库、模型配置、解析器或部署脚本。
 
+与 [PR-005 编辑器关联校验](2026-11-18-creation-editor-validation.md) 并行时，本 PR 负责工作区打开编辑器，PR-005 负责 `DefinitionEditor` 内部校验；双方保持 `initial/today/locked/onSave/onCancel` 接口，不跨界修改对方文件。
+
 ## 逐项 TODO
 
 - [x] B01 · 核对 `main` `4c0bd70`。明确失败后的按钮原先只调用 `cancelConfirmation()`。本次改为按原请求打开表单或编辑器。

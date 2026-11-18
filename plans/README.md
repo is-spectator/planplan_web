@@ -2,7 +2,7 @@
 
 **当前代码统一在 `is-spectator/planplan_web`：网页 `src/`、后端 `server/`、部署 `deploy/`。** 默认主分支是 `main`；`planplan` 仅为参考来源。历史报告里的相邻checkout是当时记录，当前开发／PR入口以根README及[单仓交付TODO](todos/2026-11-17-single-repository.md)为准。
 
-更新：2026-11-18（Asia/Shanghai；PR-001 已提交评审，尚未合并或部署，线上状态未改变）
+更新：2026-11-18（Asia/Shanghai；PR-001 已合并到 main `4c0bd70`，尚未部署，线上状态未改变）
 
 **最新线上候选：功能修复9f763547已部署。** 歧义删除、创作时长、历史分页／游标及午夜提交保护已安装，并补齐部署前发现的跨类型否定删除缺口。同包目标PG15.19为861/861，公网83/83；仅更新版本配置，继续百度、无fallback。创作20/20身份一致；最终基础36通过、1非法输出、293未执行，完整及人工门槛仍未通过。主清单12/18不变，部署TODO4/4，详见[精确上线记录](releases/2026-11-17-trial-readiness-functions.md)。
 
@@ -29,7 +29,7 @@
 | [功能修复部署 TODO](todos/2026-11-17-trial-readiness-deployment.md) | 4/4：当前线上9f763547，同包861项、公网验收通过；完整试用门槛仍保留 |
 | [最新功能收尾 TODO · 11月17日](todos/2026-11-17-trial-readiness-functions.md) | 6/6：歧义删除、创作稳定性、历史与午夜保护，本地验证完成，后续部署见上行 |
 | [最新功能验证报告](template-platform/trial-readiness-functions-2026-11-17.md) | 后端858项、浏览器74项、真实本地API15项；创作20/20，基础38/330已测通过 |
-| [PR 任务索引](prs/README.md) | PR-001 后端 AI 失败提示的文档状态见索引；PR-002 网页手动继续已提交评审，尚未合并或部署 |
+| [PR 任务索引与并行分工](prs/README.md) | 新增 5 份待实施：市场导航、审核分页、创作校验、完整导出、自动化检查。PR-001 已合并，PR-002 已提交评审；含文件所有权、人员安排及组合验收 |
 | [全版本继续实施 TODO](todos/2026-11-16-platform-completion.md) | v0.1–v0.4缺口、社区市场、扩展模板、技术验证与真实发布/试用 |
 | [今日计划功能 TODO · 11月17日](todos/2026-11-17-plan-functionality.md) | 历史7/8：09ab已发布；该批C002失败保留，新修复与20/20见最新收尾报告 |
 | [新增免费候选模型计划](todos/2026-11-17-model-candidates.md) | 独立后续阶段；默认仍百度，NVIDIA候选仅合成评测，不改变线上路由 |
