@@ -7,6 +7,7 @@ import { createApp } from '../src/api/app.js';
 import { issueToken, upsertUser, type AuthConfig } from '../src/api/auth.js';
 import { csrfTokenFor } from '../src/api/web-session.js';
 import { FakeLlm, LlmError } from '../src/ai/llm.js';
+import { aiFailureMessage } from '../src/ai/user-feedback.js';
 import { FakeCreationLlm, definitionBody, type CreationLlm, type CreationProposal } from '../src/ai/creation.js';
 import { CreationRequests, type CreationRequest } from '../src/services/creation-requests.js';
 import { requestAccountDeletion } from '../src/services/deletion.js';
@@ -149,8 +150,9 @@ describe('私人创作 HTTP、请求恢复与账户边界', () => {
     const created = await saved(send({ action: 'create' }, a.headers, target));
     const body = { clientOpId: randomUUID(), action: 'message', draftId: created.draft.id, expectedVersion: 1, text: '设计每日饮水模板' };
     const failed = await saved(send(body, a.headers, target));
-    expect(failed).toMatchObject({ transient: true, draft: { version: 1, definition: null, messages: [] } });
+    expect(failed).toMatchObject({ transient: true, message: aiFailureMessage('timeout', 'creation'), draft: { version: 1, definition: null, messages: [] } });
     expect(JSON.stringify(failed)).not.toContain('untrusted provider');
+    expect(failed.message).not.toContain('什么都没有保存');
     expect((await saved(read(`/v1/creation/requests/${body.clientOpId}`, a.headers, target))).status).toBe('not_found');
     expect((await send({ ...body, text: '不同要求' }, a.headers, target)).status).toBe(409);
     const result = await saved(send(body, a.headers, target));

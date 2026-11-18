@@ -49,6 +49,35 @@ describe('Qwen 和 OpenRouter 独立配置与传输', () => {
     expect(body).not.toHaveProperty('reasoning');
   });
 
+  it('受控HTTP样本只分类为既有错误，不放宽空对象、坏JSON、截断或schema', async () => {
+    const sample = async (body: unknown, status = 200) => {
+      let calls = 0;
+      const llm = new OpenAICompatibleLlm('synthetic-openrouter-key', 'https://fixture.test/v1', model, 'compact', 100, {
+        provider: 'openrouter', fetch: async () => { calls++; return new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } }); },
+      });
+      const error = await llm.plan('system fixture', '午饭20元').then(() => null, (caught: unknown) => caught);
+      return { calls, error };
+    };
+    const ok = (intent: string) => ({ choices: [{ message: { role: 'assistant', content: intent }, finish_reason: 'stop' }], usage: { prompt_tokens: 3, completion_tokens: 1 } });
+    for (const content of ['{}', '', '{bad', '{"intent":"write","writes":[]}']) {
+      const { calls, error } = await sample(ok(content));
+      expect(calls).toBe(1);
+      expect(error).toMatchObject({ kind: 'invalid_output', message: 'Model request failed: invalid_output' });
+      if (content) expect(String((error as Error).message)).not.toContain(content);
+    }
+    const truncated = await sample({ choices: [{ message: { content: '{"intent":"write"' }, finish_reason: 'length' }], usage: { prompt_tokens: 4, completion_tokens: 2 } });
+    expect(truncated.error).toMatchObject({ kind: 'invalid_output', usage: { prompt: 4, completion: 2 } });
+    const schema = await sample(ok(JSON.stringify({ intent: 'not-a-turn', reply: 'raw provider text' })));
+    expect(schema.error).toMatchObject({ kind: 'invalid_output' });
+    expect(String((schema.error as Error).message)).not.toContain('raw provider text');
+    for (const [status, kind] of [[429, 'rate_limited'], [401, 'unauthorized'], [403, 'unauthorized'], [402, 'billing'], [400, 'invalid_request'], [500, 'unavailable']] as const) {
+      const { calls, error } = await sample({ error: { message: 'sk-secret-provider-body', code: status } }, status);
+      expect(calls).toBe(1);
+      expect(error).toMatchObject({ kind, message: `Model request failed: ${kind}` });
+      expect(String((error as Error).message)).not.toContain('sk-secret-provider-body');
+    }
+  });
+
   it('OpenRouter HTTP402归为billing且SDK不重试或传播原文', async () => {
     let calls = 0;
     const llm = new OpenAICompatibleLlm('synthetic-openrouter-key', 'https://fixture.test/v1', model, 'compact', 100, {
