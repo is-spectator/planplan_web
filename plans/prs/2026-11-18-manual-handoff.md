@@ -1,6 +1,6 @@
 # PR-002：AI 失败后直接进入手动记录或模板编辑
 
-状态：实施中（已提交评审，尚未合并，未部署）。分支 `cursor/ai-manual-handoff-ca84`，基线 `main` `4c0bd70f731709f8b31bc018b8725d050b56c2d6`（已含 PR-001）。不依赖 PR-001 的文案。返回 [PR 任务索引](README.md)。
+状态：实施中（已提交评审，尚未合并，未部署）。[PR #3](https://github.com/is-spectator/planplan_web/pull/3)，分支 `cursor/ai-manual-handoff-ca84`，提交 `e34314ca000161eacc45eac82c3ce1855dd4eaa1`，基线 `main` `4c0bd70f731709f8b31bc018b8725d050b56c2d6`（已含 PR-001）。不依赖 PR-001 的文案。返回 [PR 任务索引](README.md)。
 
 ## PR 定义
 
