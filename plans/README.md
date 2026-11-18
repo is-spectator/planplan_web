@@ -29,7 +29,7 @@
 | [功能修复部署 TODO](todos/2026-11-17-trial-readiness-deployment.md) | 4/4：当前线上9f763547，同包861项、公网验收通过；完整试用门槛仍保留 |
 | [最新功能收尾 TODO · 11月17日](todos/2026-11-17-trial-readiness-functions.md) | 6/6：歧义删除、创作稳定性、历史与午夜保护，本地验证完成，后续部署见上行 |
 | [最新功能验证报告](template-platform/trial-readiness-functions-2026-11-17.md) | 后端858项、浏览器74项、真实本地API15项；创作20/20，基础38/330已测通过 |
-| [PR 任务索引](prs/README.md) | PR-001 后端 AI 失败提示已合并，尚未部署；PR-002 网页直接进入手动记录／编辑仍待实施。含独立 TODO、验收与 PR 描述 |
+| [PR 任务索引与并行分工](prs/README.md) | 新增 5 份待实施：市场导航、审核分页、创作校验、完整导出、自动化检查。PR-001 已合并，PR-002 已提交评审；含文件所有权、人员安排及组合验收 |
 | [全版本继续实施 TODO](todos/2026-11-16-platform-completion.md) | v0.1–v0.4缺口、社区市场、扩展模板、技术验证与真实发布/试用 |
 | [今日计划功能 TODO · 11月17日](todos/2026-11-17-plan-functionality.md) | 历史7/8：09ab已发布；该批C002失败保留，新修复与20/20见最新收尾报告 |
 | [新增免费候选模型计划](todos/2026-11-17-model-candidates.md) | 独立后续阶段；默认仍百度，NVIDIA候选仅合成评测，不改变线上路由 |

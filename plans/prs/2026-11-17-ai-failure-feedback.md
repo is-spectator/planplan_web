@@ -1,6 +1,6 @@
 # PR-001：聊天与创作的 AI 失败反馈
 
-状态：已合并，尚未部署。[PR #1](https://github.com/is-spectator/planplan_web/pull/1) 于 2026-11-18 13:28（Asia/Shanghai）合并，合并提交 `4c0bd70f731709f8b31bc018b8725d050b56c2d6`。实现提交 `448cc0385a0b22df1757d44becdb0e694741873a`，分支 `cursor/ai-failure-feedback-ca84`。网页手工路径未验收，见 A04。线上版本未改变。
+状态：**已合并，尚未部署**。[PR #1](https://github.com/is-spectator/planplan_web/pull/1) 于 2026-11-18 13:28（Asia/Shanghai）合并，合并提交为 `4c0bd70f731709f8b31bc018b8725d050b56c2d6`。分支 `cursor/ai-failure-feedback-ca84`，实现提交 `448cc0385a0b22df1757d44becdb0e694741873a`，基线 `main` `7c03257934444a4d2dcdcdc1bb486b19b378488c`。保留下列实施者验证记录；网页手工路径未验收，见 A04，不因合并而补勾。
 
 返回 [PR 任务索引](README.md)。本 PR 只改后端安全文案；网页中直接打开手动表单／编辑器的交互单列为 [PR-002](2026-11-18-manual-handoff.md)，可独立并行实施。
 
