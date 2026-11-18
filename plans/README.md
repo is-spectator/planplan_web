@@ -2,7 +2,7 @@
 
 **当前代码统一在 `is-spectator/planplan_web`：网页 `src/`、后端 `server/`、部署 `deploy/`。** 默认主分支是 `main`；`planplan` 仅为参考来源。历史报告里的相邻checkout是当时记录，当前开发／PR入口以根README及[单仓交付TODO](todos/2026-11-17-single-repository.md)为准。
 
-更新：2026-11-17（Asia/Shanghai）
+更新：2026-11-18（Asia/Shanghai；新增 PR 交接索引，功能与上线状态未改变）
 
 **最新线上候选：功能修复9f763547已部署。** 歧义删除、创作时长、历史分页／游标及午夜提交保护已安装，并补齐部署前发现的跨类型否定删除缺口。同包目标PG15.19为861/861，公网83/83；仅更新版本配置，继续百度、无fallback。创作20/20身份一致；最终基础36通过、1非法输出、293未执行，完整及人工门槛仍未通过。主清单12/18不变，部署TODO4/4，详见[精确上线记录](releases/2026-11-17-trial-readiness-functions.md)。
 
@@ -29,7 +29,7 @@
 | [功能修复部署 TODO](todos/2026-11-17-trial-readiness-deployment.md) | 4/4：当前线上9f763547，同包861项、公网验收通过；完整试用门槛仍保留 |
 | [最新功能收尾 TODO · 11月17日](todos/2026-11-17-trial-readiness-functions.md) | 6/6：歧义删除、创作稳定性、历史与午夜保护，本地验证完成，后续部署见上行 |
 | [最新功能验证报告](template-platform/trial-readiness-functions-2026-11-17.md) | 后端858项、浏览器74项、真实本地API15项；创作20/20，基础38/330已测通过 |
-| [下一支PR：AI失败反馈](prs/2026-11-17-ai-failure-feedback.md) | 待交接：单后端PR，统一聊天／创作失败文案，保留恢复语义；含TODO、验收与PR描述 |
+| [PR 任务索引](prs/README.md) | 两份待实施交接书：PR-001 后端 AI 失败提示；PR-002 网页直接进入手动记录／编辑。可并行，含独立 TODO、验收与 PR 描述 |
 | [全版本继续实施 TODO](todos/2026-11-16-platform-completion.md) | v0.1–v0.4缺口、社区市场、扩展模板、技术验证与真实发布/试用 |
 | [今日计划功能 TODO · 11月17日](todos/2026-11-17-plan-functionality.md) | 历史7/8：09ab已发布；该批C002失败保留，新修复与20/20见最新收尾报告 |
 | [新增免费候选模型计划](todos/2026-11-17-model-candidates.md) | 独立后续阶段；默认仍百度，NVIDIA候选仅合成评测，不改变线上路由 |
@@ -119,6 +119,6 @@
 
 ## 仓库边界与依据
 
-`planplan_web` 实现浏览器前端；`planplan/server` 是唯一业务后端。本机配套后端 checkout 为相邻的 `planplan-web-session`，具体分支及状态见[实施进度](implementation.md)。
+`is-spectator/planplan_web` 是当前唯一开发、PR 与部署仓库：浏览器前端在 `src/`，业务后端在 `server/`，部署工具在 `deploy/`，主分支为 `main`。历史报告中的 `planplan/server` 或相邻 `planplan-web-session` 是迁移前的来源与验证路径，不是新任务的工作目录；当前交付依据见[单仓交付记录](todos/2026-11-17-single-repository.md)。
 
 初始业务依据为 `is-spectator/planplan` 提交 [`1fc1bc5136af4f4e69cc81ef74863fbe34b208d2`](https://github.com/is-spectator/planplan/tree/1fc1bc5136af4f4e69cc81ef74863fbe34b208d2)，后续已有本地会话及模型适配。实施新工作包前核对当前文件和未提交改动，保留既有数据及已工作的业务。

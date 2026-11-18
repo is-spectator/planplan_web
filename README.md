@@ -4,6 +4,8 @@ PlanPlan 的网页应用。**只需这个仓库**：根目录 `src/` 是 React �
 
 网站 [clyna.ai](https://clyna.ai) 已运行受限内测候选。当前版本、实际验收与尚未完成的正式试用事项以 [plans](plans/README.md) 为准。
 
+交给其他开发者或 agent 的任务统一放在 [PR 计划书目录](plans/prs/README.md)：每项列明范围、TODO、验收和交付要求，从本仓库最新 `main` 建立独立分支。
+
 ## 本地运行
 
 建议使用与部署环境一致的 Node.js 24；前端最低要求 Node.js 22.12。后端包管理器固定 pnpm 10.33.2，前后端分别使用自己的锁文件。
