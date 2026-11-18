@@ -83,7 +83,7 @@ function DetailContent({ plan }: { plan: PlanView }) {
   const studyView = view && 'week' in view ? view : null
   const records = ledgerView?.records ?? (studyView ? studyView.totalRecords === undefined ? studyView.records.slice(offset, offset + 20) : studyView.records : [])
   const total = ledgerView ? ledgerView.stats.expenseCount + ledgerView.stats.refundCount : studyView?.totalRecords ?? studyView?.records.length ?? 0
-  useRecordPageBounds(view ? total : undefined, offset, setOffset)
+  useRecordPageBounds(view ? total : undefined, offset, setOffset, user!.dataVersion)
   const currentPeriod = ledgerView?.month ?? studyView?.week ?? period
   const periods = ledgerView ? [...new Set([user!.today.slice(0, 7), ...ledgerView.months])].sort().reverse() : studyView?.weeks ?? []
 

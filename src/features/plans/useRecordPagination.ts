@@ -31,11 +31,18 @@ export function useRecordPagination(search: URLSearchParams, setSearch: SetURLSe
   return { offset, setOffset }
 }
 
-export function useRecordPageBounds(total: number | undefined, offset: number, setOffset: (offset: number) => void) {
+export function useRecordPageBounds(total: number | undefined, offset: number, setOffset: (offset: number) => void, dataVersion: number) {
+  const settledVersion = useRef(dataVersion)
   useEffect(() => {
-    // Only the current query's returned count can correct an out-of-range page.
+    // A new dataset makes the old page meaningless. Pagination already returns
+    // to the first page; clamping this stale offset to the last page would
+    // overwrite that reset, including on the development double effect run.
+    if (settledVersion.current !== dataVersion) {
+      if (offset === 0) settledVersion.current = dataVersion
+      return
+    }
     if (total !== undefined && offset > 0 && offset >= total) setOffset(Math.max(0, Math.ceil(total / pageSize) - 1) * pageSize)
-  }, [offset, setOffset, total])
+  }, [dataVersion, offset, setOffset, total])
 }
 
 export function useHistoryRestart(error: unknown, setOffset: (offset: number) => void) {

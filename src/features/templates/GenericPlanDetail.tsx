@@ -47,7 +47,7 @@ export function GenericPlanDetail({ plan }: { plan: PlanView }) {
   function changeDate(value: string) { const next = new URLSearchParams(); if (range !== 'metrics') next.set('range', range); if (value) next.set('date', value); setSearch(next); setAdding(false); setSettings(false); setLastOperation(null) }
   const records = query.data?.records ?? []
   const total = query.data?.totalRecords ?? 0
-  useRecordPageBounds(query.data?.totalRecords, offset, setOffset)
+  useRecordPageBounds(query.data?.totalRecords, offset, setOffset, user!.dataVersion)
   return <>
     <header className="page-heading plan-detail-heading"><div><h1>{plan.name}</h1><p>{plan.status === 'archived' ? '已归档 · 历史记录仍会保留' : '每一份日常积累，都清楚地留在这里。'}</p></div><button type="button" className="button plan-secondary" disabled={query.isFetching || current.isFetching} onClick={() => { void query.refetch(); void current.refetch() }}><RefreshCw size={16} aria-hidden="true" />刷新</button></header>
     {state && <p className="reading-source">来自{state.source === 'private' ? '我的模板' : state.source === 'community' ? '社区模板' : ' PlanPlan 官方'}「{state.definition.name}」· 你的私人计划</p>}
