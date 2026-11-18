@@ -1,6 +1,6 @@
 # PR-001：聊天与创作的 AI 失败反馈
 
-状态：实施中（已提交评审，尚未合并，未部署）。[PR #1](https://github.com/is-spectator/planplan_web/pull/1)，分支 `cursor/ai-failure-feedback-ca84`，提交 `448cc0385a0b22df1757d44becdb0e694741873a`。基线为 `main` `7c03257934444a4d2dcdcdc1bb486b19b378488c`。网页手工路径未验收，见 A04。
+状态：已合并，尚未部署。[PR #1](https://github.com/is-spectator/planplan_web/pull/1) 于 2026-11-18 13:28（Asia/Shanghai）合并，合并提交 `4c0bd70f731709f8b31bc018b8725d050b56c2d6`。实现提交 `448cc0385a0b22df1757d44becdb0e694741873a`，分支 `cursor/ai-failure-feedback-ca84`。网页手工路径未验收，见 A04。线上版本未改变。
 
 返回 [PR 任务索引](README.md)。本 PR 只改后端安全文案；网页中直接打开手动表单／编辑器的交互单列为 [PR-002](2026-11-18-manual-handoff.md)，可独立并行实施。
 
@@ -84,7 +84,7 @@
 - [ ] A04 · 未用当前网页和 `dev:api` 夹具做手工验证。夹具模型固定返回“无法理解”，不会发出已分类的 `LlmError`；本次不改网页、夹具或真实模型。应用内 HTTP 已覆盖聊天失败响应。取消重试后的跳转属于 PR-002。
 - [x] A05 · 后端 typecheck、构建和 PGlite 全量通过。聊天评测执行身份已纳入新文案模块；创作评测运行路径不加载该模块，因此未改 `creation-run.ts`。未调用真实模型，未部署。
 
-完成且验证一项后再打勾。A04 仍未完成，本项尚未合并。
+完成且验证一项后再打勾。A04 仍未完成。本项已合并到 `main`，尚未部署，也不代表线上已更新。
 
 ## 验收矩阵
 
