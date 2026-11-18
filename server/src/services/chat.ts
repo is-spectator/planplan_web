@@ -7,6 +7,7 @@ import { randomUUID } from 'node:crypto';
 import type { Db, Queryable } from '../db/db.js';
 import type { Llm } from '../ai/llm.js';
 import { LlmError } from '../ai/llm.js';
+import { aiFailureMessage } from '../ai/user-feedback.js';
 import { buildSystemPrompt } from '../ai/prompt.js';
 import type { Turn, TurnQuery, TurnWrite } from '../ai/turn.js';
 import { formatYuan, parseYuanToCents, isValidCents } from '../domain/money.js';
@@ -1008,7 +1009,7 @@ export class Chat {
       if (e instanceof LlmError) {
         await logEvent(this.db, 'model_failure', { kind: e.kind, latencyMs: Date.now() - started });
         await usage(this.db, userId, 'failure', `${input.clientMsgId}:model`, { requestHash: attemptRequestDigest(userId, input.clientMsgId), category: 'model', code: e.kind, retryResult: 'unknown', latencyMs: Date.now() - started });
-        out = { text: '', cards: [{ type: 'error', code: 'model_unavailable', message: 'AI 服务暂时未能处理这次输入，这次什么都没有保存。你的输入已保留，可以重试，或在计划详情里用表单记录。', retryable: true }], transient: true };
+        out = { text: '', cards: [{ type: 'error', code: 'model_unavailable', message: aiFailureMessage(e.kind, 'chat'), retryable: true }], transient: true };
       } else if (e instanceof DomainError) {
         // Keep authorization failures as 403 so clients retain input and can retry after consent.
         if (e.code === 'ai_consent_required') throw e;

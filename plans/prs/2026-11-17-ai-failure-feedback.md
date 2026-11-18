@@ -1,6 +1,6 @@
 # PR-001：聊天与创作的 AI 失败反馈
 
-状态：待实施。用户要求规划后交给另一位 agent；本次只写任务说明，不修改业务代码、不创建 GitHub PR。
+状态：实施中（已提交评审，尚未合并，未部署）。分支 `cursor/ai-failure-feedback-ca84`。基线为 `main` `7c03257934444a4d2dcdcdc1bb486b19b378488c`。网页手工路径未验收，见 A04。
 
 返回 [PR 任务索引](README.md)。本 PR 只改后端安全文案；网页中直接打开手动表单／编辑器的交互单列为 [PR-002](2026-11-18-manual-handoff.md)，可独立并行实施。
 
@@ -78,13 +78,13 @@
 
 ## 逐项 TODO
 
-- [ ] A01 · 核对9f基线和现有失败／恢复路径，先用固定合成响应复现统一提示及不准确的“什么都没保存”表述。
-- [ ] A02 · 实现共享安全消息映射并接入聊天、创作；保留协议、状态机、内部分类和正常分支。
-- [ ] A03 · 完成运输层／领域／HTTP回归，证明非法输出零业务更改、失败后同ID恢复成功、不出现重复结果；通过后记录实际计数。
-- [ ] A04 · 使用当前网页与真实本地API验证聊天／创作至少各一种失败及手动继续；核对提示可见、输入／草稿保留、没有额外自动POST。
-- [ ] A05 · typecheck、构建及适用完整后端回归通过；核对最终差异、执行身份和无秘密泄漏，交付PR描述、测试证据、未完成项。
+- [x] A01 · 核对 `main` `7c03257`：聊天把全部 `LlmError` 收成同一句“这次什么都没有保存”；创作只粗分超时、其他模型失败和生成失败。未把旧提交再跑一遍。修复后的受控响应见 A03。
+- [x] A02 · 新增 `server/src/ai/user-feedback.ts`，聊天与创作的 `LlmError` 共用映射。响应结构、状态机、内部分类和 `DomainError('invalid_input')` 原文案保持不变。
+- [x] A03 · 运输层、服务和 HTTP 回归已通过。非法输出不改计划、目标或记录；同 ID 再次成功只产生一条记录；未知异常仍走原来的 500，不声称“没有更改计划或记录”。计数见下方实施记录。
+- [ ] A04 · 未用当前网页和 `dev:api` 夹具做手工验证。夹具模型固定返回“无法理解”，不会发出已分类的 `LlmError`；本次不改网页、夹具或真实模型。应用内 HTTP 已覆盖聊天失败响应。取消重试后的跳转属于 PR-002。
+- [x] A05 · 后端 typecheck、构建和 PGlite 全量通过。聊天评测执行身份已纳入新文案模块；创作评测运行路径不加载该模块，因此未改 `creation-run.ts`。未调用真实模型，未部署。
 
-完成且验证一项后再打勾。本任务仅规划，以上当前均未完成。
+完成且验证一项后再打勾。A04 仍未完成，本项尚未合并。
 
 ## 验收矩阵
 
@@ -121,6 +121,22 @@
 > 保留现有响应结构、显式同ID重试、未知结果核对和严格输出校验，不增加自动重试或模型切换。
 >
 > 验证：填写实际执行的专项、完整后端及网页本地API结果；列明跳过／未执行项。完整真实模型评测和人工审定仍独立待办。
+
+## 实施记录（2026-11-18）
+
+命令均在 `server/` 执行，数据库为隔离 PGlite，未设置 `TEST_DATABASE_URL`，未使用生产凭据或真实模型。
+
+| 命令 | 结果 |
+| --- | --- |
+| `pnpm exec vitest run test/ai-failure-feedback.test.ts test/ai-provider.test.ts test/chat.test.ts test/creation-api.test.ts test/provider-wait-recovery.test.ts` | 先因缺少指纹失败；补跑 `tsx scripts/ai-fingerprint.ts` 后，4 个既有文件通过，新文件当时有 1 个 HTTP 用例超时 |
+| `pnpm exec vitest run test/ai-failure-feedback.test.ts` | 17/17 通过 |
+| `pnpm run typecheck` | 通过 |
+| `pnpm run build` | 通过 |
+| `pnpm test`（实际为 `vitest run --exclude dist/**`，PGlite） | 77 个文件，876 通过，3 跳过，0 失败，约 344 秒 |
+
+3 个跳过里，源码能对应到的是未配置 `TEST_DATABASE_URL` 时跳过的 PostgreSQL 用例：`history-pagination.test.ts` 与 `shared-rate-limit.test.ts`。默认报告没有打印第三条跳过的名字。根目录网页的 typecheck、lint、build 和浏览器测试未跑，因为这次没有改 `src/`。
+
+未完成：A04 的网页与本地夹具手工路径；真实模型评测和人工审定仍不在本 PR；合并后还要与 PR-002 再核对一次完整手动路径。
 
 ## 给实施 agent 的指令
 

@@ -3,6 +3,7 @@ import { z } from 'zod';
 import type { Db, Queryable, Transaction } from '../db/db.js';
 import { creationHistoryAfterCancel, isCreationCancel, type CreationLlm } from '../ai/creation.js';
 import { LlmError } from '../ai/llm.js';
+import { aiFailureMessage } from '../ai/user-feedback.js';
 import { shanghaiDate } from '../domain/time.js';
 import { requireActiveUser } from './deletion.js';
 import { DomainError } from './errors.js';
@@ -163,11 +164,10 @@ export class CreationRequests {
           return null;
         }
         const current = await getCreationDraft(q, userId, request.draftId);
-        const message = error instanceof LlmError && error.kind === 'timeout'
-          ? '这次生成等待超时，原草稿已保留。可以重试或手动编辑。'
-          : error instanceof LlmError && !['invalid_output', 'invalid_request'].includes(error.kind)
-            ? '暂时无法完成创作，原草稿已保留。可以稍后重试或手动编辑。'
-            : '生成的模板暂时无法使用，原草稿已保留。可以重试或手动编辑。';
+        // DomainError('invalid_input') keeps the previous recoverable copy. Only LlmError uses the shared mapping.
+        const message = error instanceof LlmError
+          ? aiFailureMessage(error.kind, 'creation')
+          : '生成的模板暂时无法使用，原草稿已保留。可以重试或手动编辑。';
         const result: CreationResult = { clientOpId: request.clientOpId, kind: 'message', draft: current, transient: true, message };
         await q.query("UPDATE creation_requests SET status='retryable',response=$4,error=NULL,lease_token=NULL,lease_until=NULL,updated_at=$5 WHERE user_id=$1 AND client_op_id=$2 AND lease_token=$3", [userId, request.clientOpId, token, JSON.stringify(result), this.now()]);
         return result;

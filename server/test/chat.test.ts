@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { FakeLlm, LlmError } from '../src/ai/llm.js';
+import { aiFailureMessage } from '../src/ai/user-feedback.js';
 import type { Turn, TurnWrite } from '../src/ai/turn.js';
 import { Chat, type Card } from '../src/services/chat.js';
 import { ledgerView } from '../src/services/views.js';
@@ -155,7 +156,8 @@ describe('对话', () => {
     const chat = new Chat(c.db, llm);
     const first = await chat.send(c.userId, { clientMsgId: 'retry-1', text: '午饭20元', inputAt: T });
     expect(first.transient).toBe(true);
-    expect(card(first.assistant.cards, 'error')!.retryable).toBe(true);
+    expect(card(first.assistant.cards, 'error')).toMatchObject({ code: 'model_unavailable', retryable: true, message: aiFailureMessage('unavailable', 'chat') });
+    expect(first.assistant.cards[0]).not.toHaveProperty('kind');
     fail = false;
     const second = await chat.send(c.userId, { clientMsgId: 'retry-1', text: '午饭20元', inputAt: T });
     expect(card(second.assistant.cards, 'receipt')).toBeTruthy();
