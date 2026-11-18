@@ -105,7 +105,7 @@ test('另一份定义改变控件、约束、指标和顺序，同一页面真�
   await page.getByRole('button', { name: '保存记录' }).click()
   await expect(page.locator('.generic-record-row')).toHaveCount(1)
   expect(actions[0]).toMatchObject({ type: 'add_generic_record', planId, values: { date: today, quantity: 4, context: '下午' } })
-  expect(await page.getByRole('region', { name: '记录列表' }).evaluate((element) => !!(element.compareDocumentPosition(document.querySelector('[aria-label="记录统计"]')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true)
+  expect(await page.evaluate(() => Array.from(document.querySelectorAll('section[aria-label="记录列表"], section[aria-label="记录统计"]'), (node) => node.getAttribute('aria-label')))).toEqual(['记录列表', '记录统计'])
   definition.recordFields.push({ id: 'mood', label: '补充感受', type: 'text', required: false, maxLength: 30 })
   definition.metrics.push({ id: 'events', label: '记录次数', operation: 'count', period: 'day' })
   definition.components = ['summary', 'records']

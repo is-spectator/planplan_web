@@ -142,6 +142,8 @@ for (const kind of ['ledger', 'study', 'generic'] as const) test(`${kind}多页�
   await page.evaluate(() => window.dispatchEvent(new Event('focus')))
   await expect(page).not.toHaveURL(/page=/)
   await expect(page.locator('.record-row')).toHaveCount(20)
+  await expect(page).not.toHaveURL(/page=/)
+  await expect(page.getByRole('navigation', { name: '记录分页' })).toContainText('第 1 /')
   await page.getByRole('button', { name: '下一页', exact: true }).click()
   await expect(page.getByRole('navigation', { name: '记录分页' })).toContainText('第 2 / 2 页')
   f.state.previous = f.state.previous.slice(0, 2); f.state.version++
